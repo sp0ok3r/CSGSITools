@@ -33,8 +33,6 @@
             this.Worker_GSI = new System.ComponentModel.BackgroundWorker();
             this.lbl_playerstate = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lbl_bombCurrentTime = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_bombCurrentState = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -108,24 +106,6 @@
             this.label1.Size = new System.Drawing.Size(71, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "Player State:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 156);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 15);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Bomb Time:";
-            // 
-            // lbl_bombCurrentTime
-            // 
-            this.lbl_bombCurrentTime.AutoSize = true;
-            this.lbl_bombCurrentTime.Location = new System.Drawing.Point(100, 156);
-            this.lbl_bombCurrentTime.Name = "lbl_bombCurrentTime";
-            this.lbl_bombCurrentTime.Size = new System.Drawing.Size(79, 15);
-            this.lbl_bombCurrentTime.TabIndex = 3;
-            this.lbl_bombCurrentTime.Text = "(currentState)";
             // 
             // label2
             // 
@@ -232,8 +212,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.lbl_bombCurrentTime);
             this.groupBox3.Controls.Add(this.lbl_roundState);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.lbl_bombCurrentState);
@@ -716,8 +694,6 @@
         private System.Windows.Forms.Label lbl_currentMap;
         private System.ComponentModel.BackgroundWorker Worker_CheckCSGO;
         private System.Windows.Forms.NotifyIcon notifyIcon;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lbl_bombCurrentTime;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chk_stayState;

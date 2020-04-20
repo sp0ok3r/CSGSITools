@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 
 namespace CSGSITools
@@ -8,6 +9,8 @@ namespace CSGSITools
     {
         public static string AppName = "CSGSITools";
         public static string Version = "1.0.0";
+
+        public static readonly string ExecutablePath = Path.GetDirectoryName(Application.ExecutablePath);
 
         public static readonly Process[] CurrentProcesses = Process.GetProcesses();
 

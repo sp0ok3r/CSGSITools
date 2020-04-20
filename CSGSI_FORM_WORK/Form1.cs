@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,6 +8,11 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Steam4NET;
+using Microsoft.Win32;
+using System.Text.RegularExpressions;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CSGSITools
 {
@@ -40,7 +44,7 @@ namespace CSGSITools
             }
 
             steam006 = Steamworks.CreateSteamInterface<ISteam006>();
-           
+
             steamclient = Steamworks.CreateInterface<ISteamClient012>();
             pipe = steamclient.CreateSteamPipe();
             user = steamclient.ConnectToGlobalUser(pipe);
@@ -48,9 +52,9 @@ namespace CSGSITools
             steamfriends013 = steamclient.GetISteamFriends<ISteamFriends013>(user, pipe);
             steamfriends002 = steamclient.GetISteamFriends<ISteamFriends002>(user, pipe);
             CSteamID steamID = steamuser.GetSteamID();
-            
+
             CurrentState = steamfriends002.GetFriendPersonaState(steamID);
-            
+
             string ConvertTo64 = steamID.ConvertToUint64().ToString();
             txtBox_steamID.Text = ConvertTo64;
             steamid = steamID;
@@ -64,13 +68,13 @@ namespace CSGSITools
                 Console.WriteLine("steamclient is null !");
                 return -1;
             }
-            
+
 
             return 0;
 
         }
         #endregion
-        
+
         GameStateListener gsl;
         Thread Th_CheckCSGOProcess;
 
@@ -91,8 +95,8 @@ namespace CSGSITools
         private static string map = "Undefined";
         private static readonly int[] stats = new int[3] { 0, 0, 0 }; //Kills, Assists, Deaths
 
-        private Stopwatch bombTimer = new Stopwatch();
-        
+        private static string csgoCFGPath;
+
         public Form1()
         {
             InitializeComponent();
@@ -101,6 +105,7 @@ namespace CSGSITools
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            LoadCSGOFolder();
             metroTab_csgsiTools.SelectedIndex = 0;
             ps_status.Visible = true;
             CheckCSGOProcess();
@@ -108,15 +113,38 @@ namespace CSGSITools
             Worker_CheckCSGO.DoWork += Worker_CheckCSGO_DoWork;
             Worker_CheckCSGO.RunWorkerAsync("CheckCSGOProcess");
             LoadSteam();
+
         }
-        
+
+        public static void LoadCSGOFolder()
+        {
+            string csgoPath = tryLocatingCSGOFolder();
+            csgoCFGPath = csgoPath + @"\csgo\cfg\";
+
+            DirectoryInfo d = new DirectoryInfo(csgoCFGPath);
+            FileInfo[] Files = d.GetFiles("gamestate_integration_teste.cfg"); 
+
+            if (Files.Length == 0)
+            {
+                Process.GetProcesses()
+                         .Where(x => x.ProcessName.ToLower()
+                                      .Contains("csgo"))
+                         .ToList()
+                         .ForEach(x => x.Kill());
+
+                string fileToCopy = Program.ExecutablePath + "\\gamestate_integration_teste.cfg";
+                File.Copy(fileToCopy, csgoCFGPath + Path.GetFileName(fileToCopy));
+            }
+        }
+
+
         private void Worker_GSI_DoWork(object sender, DoWorkEventArgs e)
         {
             gsl = new GameStateListener(3000);
             gsl.NewGameState += new NewGameStateHandler(CurrentBombState);
             gsl.NewGameState += new NewGameStateHandler(RoundState);
             gsl.NewGameState += new NewGameStateHandler(PlayerState);
-            
+
 
             if (!gsl.Start())
             {
@@ -129,15 +157,14 @@ namespace CSGSITools
             Process[] ps = Process.GetProcessesByName("csgo");
             if (ps.Length == 0)
             {
-                MessageBox.Show("Please start csgo...", Program.AppName,
+                MessageBox.Show("Starting csgo for you... restarting "+ Program.AppName + " in 15sec.", Program.AppName,
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                Environment.Exit(0);
-
-            }
-            else
-            {
-
+                Process.Start("steam://run/730");
+                
+                Thread.Sleep(15000);
+                Process.Start(Application.ExecutablePath);
+                Application.Exit();
             }
         }
 
@@ -178,7 +205,7 @@ namespace CSGSITools
 
             }
 
-            
+
             bool Flash = false;
             bool Smoke = false;
             bool Molly = false;
@@ -206,7 +233,7 @@ namespace CSGSITools
                 lbl_playerstate.ForeColor = Color.Red;
             }
 
-           
+
 
 
             //FLASHED
@@ -250,16 +277,15 @@ namespace CSGSITools
 
             }
         }
-    
+
 
         private void CurrentBombState(GameState gs)
         {
             if (!IsPlanted &&
                gs.Round.Phase == RoundPhase.Live &&
                gs.Round.Bomb == BombState.Planted &&
-               gs.Previously.Round.Bomb == BombState.Undefined){
-
-                bombTimer.Start();
+               gs.Previously.Round.Bomb == BombState.Undefined)
+            {
 
                 lbl_bombCurrentState.Text = "Bomb has been planted.";
                 lbl_bombCurrentState.ForeColor = Color.Red;
@@ -268,8 +294,7 @@ namespace CSGSITools
             }
             else if (gs.Round.Bomb != BombState.Exploded)
             {
-                bombTimer.Stop();
-
+             
                 IsPlanted = false;
                 lbl_bombCurrentState.ForeColor = Color.Red;
                 lbl_bombCurrentState.Text = "Bomb not planted.";
@@ -280,14 +305,13 @@ namespace CSGSITools
 
                 lbl_bombCurrentState.Text = "Exploded.";
                 lbl_bombCurrentState.ForeColor = Color.Red;
-                bombTimer.Reset();
+
             }
             else if (gs.Round.Bomb == BombState.Defused)
             {
 
                 lbl_bombCurrentState.Text = "Defused.";
                 lbl_bombCurrentState.ForeColor = Color.DodgerBlue;
-                bombTimer.Reset();
 
             }
             else if (IsPlanted && gs.Round.Phase == RoundPhase.FreezeTime)
@@ -304,7 +328,6 @@ namespace CSGSITools
                 lbl_bombCurrentState.Text = "No server.";
 
             }
-            lbl_bombCurrentTime.Text = bombTimer.ElapsedMilliseconds.ToString();
         }
 
         private void RoundState(GameState gs)
@@ -324,7 +347,7 @@ namespace CSGSITools
 
                 lbl_currentMap.ForeColor = Color.DarkGreen;
 
-                
+
                 if (chk_autofocus.Checked && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && gs.Player.State.Health == 100)
                 {
                     FocusProcess("csgo");
@@ -371,7 +394,7 @@ namespace CSGSITools
 
             }
         }
-        
+
         #region FocusProcess - http://josephgozlan.blogspot.com/2013/02/c-bring-another-application-to.html
         [DllImport("user32.dll")]
         public static extern bool ShowWindowAsync(HandleRef hWnd, int nCmdShow);
@@ -391,7 +414,7 @@ namespace CSGSITools
         }
         #endregion
 
-        
+
         private void Worker_CheckCSGO_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -421,7 +444,7 @@ namespace CSGSITools
                 MessageBox.Show("?", "Sp0ok3r SteamTools", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        
+
 
 
         #region WindowMover
@@ -535,7 +558,7 @@ namespace CSGSITools
 
         }
 
-        
+
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             gsl.Stop();
@@ -570,5 +593,47 @@ namespace CSGSITools
             Process.Start("https://github.com/rakijah/CSGSI");
         }
         #endregion
+
+
+        // https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration#Locating_CS:GO_Install_Directory
+        // Improved csgo installation detection by bernieplayshd #14
+        private static string tryLocatingCSGOFolder()
+        {
+            // Locate the Steam installation directory
+            string steamDir = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", ""),
+                   libsFile = steamDir + @"\steamapps\libraryfolders.vdf";
+
+            Regex regex = new Regex("\"\\d+\".*\"(.*?)\"", RegexOptions.Compiled);
+
+            List<string> libraries = new List<string> { steamDir.Replace('/', '\\') };
+
+            // Find all Steam game libraries
+            if (File.Exists(libsFile))
+            {
+                foreach (string line in File.ReadAllLines(libsFile))
+                {
+                    foreach (Match match in regex.Matches(line))
+                    {
+                        if (match.Success && match.Groups.Count != 0)
+                        {
+                            libraries.Add(match.Groups[1].Value.Replace("\\\\", "\\"));
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Search them for the CS:GO installation
+            foreach (string lib in libraries)
+            {
+                string csgoDir = lib + @"\steamapps\common\Counter-Strike Global Offensive";
+                if (Directory.Exists(csgoDir))
+                {
+                    return csgoDir;
+                }
+            }
+
+            return null;
+        }
     }
 }
