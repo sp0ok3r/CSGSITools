@@ -119,7 +119,7 @@ namespace CSGSITools
             csgoCFGPath = csgoPath + @"\csgo\cfg\";
 
             DirectoryInfo d = new DirectoryInfo(csgoCFGPath);
-            FileInfo[] Files = d.GetFiles("gamestate_integration_teste.cfg");
+            FileInfo[] Files = d.GetFiles("gamestate_integration_sp0ok3rTool.cfg");
 
             if (Files.Length == 0)
             {
@@ -129,7 +129,7 @@ namespace CSGSITools
                          .ToList()
                          .ForEach(x => x.Kill());
 
-                string fileToCopy = Program.ExecutablePath + "\\gamestate_integration_teste.cfg";
+                string fileToCopy = Program.ExecutablePath + "\\gamestate_integration_sp0ok3rTool.cfg";
                 File.Copy(fileToCopy, csgoCFGPath + Path.GetFileName(fileToCopy));
             }
         }
@@ -148,8 +148,7 @@ namespace CSGSITools
             }
 
         }
-
-
+        
         private void CheckCSGOProcess()
         {
             Process[] ps = Process.GetProcessesByName("csgo");
@@ -167,6 +166,7 @@ namespace CSGSITools
         }
 
 
+        #region PlayerState
         private void PlayerState(GameState gs)
         {
             int Health = gs.Player.State.Health;
@@ -232,9 +232,7 @@ namespace CSGSITools
                 lbl_playerstate.Text = "No server";
 
             }
-
-
-
+            
 
             //FLASHED
             if (gs.Player.State.Flashed == 0)
@@ -277,8 +275,9 @@ namespace CSGSITools
 
             }
         }
+        #endregion
 
-
+        #region BombState
         private void CurrentBombState(GameState gs)
         {
             if (gs.Round.Phase == RoundPhase.Live &&
@@ -327,7 +326,9 @@ namespace CSGSITools
 
             }
         }
+        #endregion
 
+        #region RoundState
         private void RoundState(GameState gs)
         {
             lbl_currentMap.Text = gs.Map.Name;
@@ -391,6 +392,7 @@ namespace CSGSITools
 
             }
         }
+        #endregion
 
         #region FocusProcess - http://josephgozlan.blogspot.com/2013/02/c-bring-another-application-to.html
         [DllImport("user32.dll")]
@@ -434,18 +436,7 @@ namespace CSGSITools
             base.WndProc(ref m);
         }
         #endregion
-
-        private void link_spk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/sp0ok3r");
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/rakijah/CSGSI");
-        }
-
-
+        
         public static void SetStatus(int Number)
         {
             Steamworks.Load(true);
@@ -516,21 +507,17 @@ namespace CSGSITools
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         private static extern IntPtr GetForegroundWindow();
-
-
+        
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (gsl != null)
             {
                 gsl.Stop();
             }
-
-
             Application.ExitThread();
             Environment.Exit(0);
         }
-
-
+        
         #region LINKS
         private void pictureBox_Github_Click(object sender, EventArgs e)
         {
@@ -572,8 +559,7 @@ namespace CSGSITools
             Process.Start("http://denricdenise.info/metroframework-faq/");
         }
         #endregion
-
-
+        
         // https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration#Locating_CS:GO_Install_Directory
         // Improved csgo installation detection by bernieplayshd #14
         private static string tryLocatingCSGOFolder()

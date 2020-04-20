@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CSGSITools_Form));
             this.lbl_playerstate = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_playerStateLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_bombCurrentState = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -49,7 +49,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.metroTab_csgsiTools = new MetroFramework.Controls.MetroTabControl();
             this.CSGOStateTabPage = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.info_tab = new MetroFramework.Controls.MetroTabPage();
             this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.metroLink_valveGSI = new MetroFramework.Controls.MetroLink();
             this.metroLink_Metro = new MetroFramework.Controls.MetroLink();
@@ -69,15 +69,15 @@
             this.txtBox_steamID = new MetroFramework.Controls.MetroTextBox();
             this.lbl_setSteamID64 = new System.Windows.Forms.Label();
             this.metroPanel10 = new MetroFramework.Controls.MetroPanel();
+            this.lbl_version = new MetroFramework.Controls.MetroLabel();
             this.ps_status = new MetroFramework.Controls.MetroProgressSpinner();
             this.lbl_infoversion = new MetroFramework.Controls.MetroLabel();
-            this.lbl_version = new MetroFramework.Controls.MetroLabel();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.metroTab_csgsiTools.SuspendLayout();
             this.CSGOStateTabPage.SuspendLayout();
-            this.metroTabPage1.SuspendLayout();
+            this.info_tab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Github)).BeginInit();
             this.metroPanel10.SuspendLayout();
             this.SuspendLayout();
@@ -85,38 +85,42 @@
             // lbl_playerstate
             // 
             this.lbl_playerstate.AutoSize = true;
-            this.lbl_playerstate.Location = new System.Drawing.Point(83, 60);
+            this.lbl_playerstate.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_playerstate.Location = new System.Drawing.Point(54, 115);
             this.lbl_playerstate.Name = "lbl_playerstate";
-            this.lbl_playerstate.Size = new System.Drawing.Size(79, 15);
+            this.lbl_playerstate.Size = new System.Drawing.Size(106, 13);
             this.lbl_playerstate.TabIndex = 1;
-            this.lbl_playerstate.Text = "(currentState)";
+            this.lbl_playerstate.Text = "(currentStatePlayer)";
             // 
-            // label1
+            // lbl_playerStateLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Player State:";
+            this.lbl_playerStateLabel.AutoSize = true;
+            this.lbl_playerStateLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_playerStateLabel.Location = new System.Drawing.Point(7, 115);
+            this.lbl_playerStateLabel.Name = "lbl_playerStateLabel";
+            this.lbl_playerStateLabel.Size = new System.Drawing.Size(40, 13);
+            this.lbl_playerStateLabel.TabIndex = 2;
+            this.lbl_playerStateLabel.Text = "Player:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 134);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(7, 138);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 15);
+            this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Bomb State:";
+            this.label2.Text = "Bomb:";
             // 
             // lbl_bombCurrentState
             // 
             this.lbl_bombCurrentState.AutoSize = true;
-            this.lbl_bombCurrentState.Location = new System.Drawing.Point(83, 134);
+            this.lbl_bombCurrentState.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_bombCurrentState.Location = new System.Drawing.Point(54, 136);
             this.lbl_bombCurrentState.Name = "lbl_bombCurrentState";
-            this.lbl_bombCurrentState.Size = new System.Drawing.Size(79, 15);
+            this.lbl_bombCurrentState.Size = new System.Drawing.Size(105, 13);
             this.lbl_bombCurrentState.TabIndex = 1;
-            this.lbl_bombCurrentState.Text = "(currentState)";
+            this.lbl_bombCurrentState.Text = "(currentStateBomb)";
             // 
             // groupBox4
             // 
@@ -209,7 +213,7 @@
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.lbl_bombCurrentState);
             this.groupBox3.Controls.Add(this.lbl_currentRoundState);
-            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.lbl_playerStateLabel);
             this.groupBox3.Controls.Add(this.lbl_playerstate);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.lbl_currentMap);
@@ -225,38 +229,41 @@
             // lbl_roundState
             // 
             this.lbl_roundState.AutoSize = true;
-            this.lbl_roundState.Location = new System.Drawing.Point(7, 107);
+            this.lbl_roundState.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_roundState.Location = new System.Drawing.Point(4, 91);
             this.lbl_roundState.Name = "lbl_roundState";
-            this.lbl_roundState.Size = new System.Drawing.Size(74, 15);
+            this.lbl_roundState.Size = new System.Drawing.Size(45, 13);
             this.lbl_roundState.TabIndex = 6;
-            this.lbl_roundState.Text = "Round State:";
+            this.lbl_roundState.Text = "Round:";
             // 
             // lbl_currentRoundState
             // 
             this.lbl_currentRoundState.AutoSize = true;
-            this.lbl_currentRoundState.Location = new System.Drawing.Point(83, 107);
+            this.lbl_currentRoundState.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_currentRoundState.Location = new System.Drawing.Point(54, 89);
             this.lbl_currentRoundState.Name = "lbl_currentRoundState";
-            this.lbl_currentRoundState.Size = new System.Drawing.Size(79, 15);
+            this.lbl_currentRoundState.Size = new System.Drawing.Size(111, 13);
             this.lbl_currentRoundState.TabIndex = 5;
-            this.lbl_currentRoundState.Text = "(currentState)";
+            this.lbl_currentRoundState.Text = "(currentStateRound)";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(43, 36);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(15, 51);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 15);
+            this.label3.Size = new System.Drawing.Size(33, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Map:";
             // 
             // lbl_currentMap
             // 
-            this.lbl_currentMap.AutoSize = true;
-            this.lbl_currentMap.Location = new System.Drawing.Point(83, 36);
+            this.lbl_currentMap.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_currentMap.Location = new System.Drawing.Point(54, 51);
             this.lbl_currentMap.Name = "lbl_currentMap";
-            this.lbl_currentMap.Size = new System.Drawing.Size(79, 15);
+            this.lbl_currentMap.Size = new System.Drawing.Size(179, 34);
             this.lbl_currentMap.TabIndex = 3;
-            this.lbl_currentMap.Text = "(currentState)";
+            this.lbl_currentMap.Text = "(currentStateMap)";
             // 
             // notifyIcon
             // 
@@ -267,13 +274,14 @@
             // metroTab_csgsiTools
             // 
             this.metroTab_csgsiTools.Controls.Add(this.CSGOStateTabPage);
-            this.metroTab_csgsiTools.Controls.Add(this.metroTabPage1);
+            this.metroTab_csgsiTools.Controls.Add(this.info_tab);
             this.metroTab_csgsiTools.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroTab_csgsiTools.Location = new System.Drawing.Point(13, 46);
             this.metroTab_csgsiTools.Name = "metroTab_csgsiTools";
-            this.metroTab_csgsiTools.SelectedIndex = 1;
+            this.metroTab_csgsiTools.SelectedIndex = 0;
+            this.metroTab_csgsiTools.ShowToolTips = true;
             this.metroTab_csgsiTools.Size = new System.Drawing.Size(584, 264);
-            this.metroTab_csgsiTools.TabIndex = 7;
+            this.metroTab_csgsiTools.TabIndex = 1;
             this.metroTab_csgsiTools.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroTab_csgsiTools.UseSelectable = true;
             // 
@@ -291,7 +299,7 @@
             this.CSGOStateTabPage.Name = "CSGOStateTabPage";
             this.CSGOStateTabPage.Size = new System.Drawing.Size(576, 222);
             this.CSGOStateTabPage.TabIndex = 1;
-            this.CSGOStateTabPage.Text = "State";
+            this.CSGOStateTabPage.Text = "🎮 GSI";
             this.CSGOStateTabPage.UseCustomBackColor = true;
             this.CSGOStateTabPage.UseCustomForeColor = true;
             this.CSGOStateTabPage.UseStyleColors = true;
@@ -299,40 +307,40 @@
             this.CSGOStateTabPage.VerticalScrollbarHighlightOnWheel = false;
             this.CSGOStateTabPage.VerticalScrollbarSize = 10;
             // 
-            // metroTabPage1
+            // info_tab
             // 
-            this.metroTabPage1.BackColor = System.Drawing.Color.Transparent;
-            this.metroTabPage1.Controls.Add(this.metroLink1);
-            this.metroTabPage1.Controls.Add(this.metroLink_valveGSI);
-            this.metroTabPage1.Controls.Add(this.metroLink_Metro);
-            this.metroTabPage1.Controls.Add(this.metroLink_Rakijah);
-            this.metroTabPage1.Controls.Add(this.metroLink_Steam4net);
-            this.metroTabPage1.Controls.Add(this.metroLink_Json);
-            this.metroTabPage1.Controls.Add(this.metroLabel3);
-            this.metroTabPage1.Controls.Add(this.metroLabel7);
-            this.metroTabPage1.Controls.Add(this.metroLabel6);
-            this.metroTabPage1.Controls.Add(this.metroLabel5);
-            this.metroTabPage1.Controls.Add(this.metroLabel4);
-            this.metroTabPage1.Controls.Add(this.metroLink_spkMusic);
-            this.metroTabPage1.Controls.Add(this.metroLink_spk);
-            this.metroTabPage1.Controls.Add(this.metroLabel9);
-            this.metroTabPage1.Controls.Add(this.lbl_mercuryAge);
-            this.metroTabPage1.Controls.Add(this.pictureBox_Github);
-            this.metroTabPage1.HorizontalScrollbarBarColor = true;
-            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.HorizontalScrollbarSize = 10;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(576, 222);
-            this.metroTabPage1.TabIndex = 2;
-            this.metroTabPage1.Text = "INFORMATION";
-            this.metroTabPage1.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroTabPage1.UseCustomBackColor = true;
-            this.metroTabPage1.UseCustomForeColor = true;
-            this.metroTabPage1.UseStyleColors = true;
-            this.metroTabPage1.VerticalScrollbarBarColor = true;
-            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.VerticalScrollbarSize = 10;
+            this.info_tab.BackColor = System.Drawing.Color.Transparent;
+            this.info_tab.Controls.Add(this.metroLink1);
+            this.info_tab.Controls.Add(this.metroLink_valveGSI);
+            this.info_tab.Controls.Add(this.metroLink_Metro);
+            this.info_tab.Controls.Add(this.metroLink_Rakijah);
+            this.info_tab.Controls.Add(this.metroLink_Steam4net);
+            this.info_tab.Controls.Add(this.metroLink_Json);
+            this.info_tab.Controls.Add(this.metroLabel3);
+            this.info_tab.Controls.Add(this.metroLabel7);
+            this.info_tab.Controls.Add(this.metroLabel6);
+            this.info_tab.Controls.Add(this.metroLabel5);
+            this.info_tab.Controls.Add(this.metroLabel4);
+            this.info_tab.Controls.Add(this.metroLink_spkMusic);
+            this.info_tab.Controls.Add(this.metroLink_spk);
+            this.info_tab.Controls.Add(this.metroLabel9);
+            this.info_tab.Controls.Add(this.lbl_mercuryAge);
+            this.info_tab.Controls.Add(this.pictureBox_Github);
+            this.info_tab.HorizontalScrollbarBarColor = true;
+            this.info_tab.HorizontalScrollbarHighlightOnWheel = false;
+            this.info_tab.HorizontalScrollbarSize = 10;
+            this.info_tab.Location = new System.Drawing.Point(4, 38);
+            this.info_tab.Name = "info_tab";
+            this.info_tab.Size = new System.Drawing.Size(576, 222);
+            this.info_tab.TabIndex = 2;
+            this.info_tab.Text = "🛈 INFORMATION";
+            this.info_tab.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.info_tab.UseCustomBackColor = true;
+            this.info_tab.UseCustomForeColor = true;
+            this.info_tab.UseStyleColors = true;
+            this.info_tab.VerticalScrollbarBarColor = true;
+            this.info_tab.VerticalScrollbarHighlightOnWheel = false;
+            this.info_tab.VerticalScrollbarSize = 10;
             // 
             // metroLink1
             // 
@@ -603,6 +611,18 @@
             this.metroPanel10.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel10.VerticalScrollbarSize = 10;
             // 
+            // lbl_version
+            // 
+            this.lbl_version.AutoSize = true;
+            this.lbl_version.Location = new System.Drawing.Point(3, 0);
+            this.lbl_version.Name = "lbl_version";
+            this.lbl_version.Size = new System.Drawing.Size(59, 19);
+            this.lbl_version.TabIndex = 82;
+            this.lbl_version.Text = "(Version)";
+            this.lbl_version.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.lbl_version.UseCustomBackColor = true;
+            this.lbl_version.UseStyleColors = true;
+            // 
             // ps_status
             // 
             this.ps_status.Location = new System.Drawing.Point(587, 3);
@@ -630,18 +650,6 @@
             this.lbl_infoversion.UseCustomBackColor = true;
             this.lbl_infoversion.UseStyleColors = true;
             // 
-            // lbl_version
-            // 
-            this.lbl_version.AutoSize = true;
-            this.lbl_version.Location = new System.Drawing.Point(3, 0);
-            this.lbl_version.Name = "lbl_version";
-            this.lbl_version.Size = new System.Drawing.Size(59, 19);
-            this.lbl_version.TabIndex = 82;
-            this.lbl_version.Text = "(Version)";
-            this.lbl_version.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.lbl_version.UseCustomBackColor = true;
-            this.lbl_version.UseStyleColors = true;
-            // 
             // CSGSITools_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -657,6 +665,7 @@
             this.MaximizeBox = false;
             this.Name = "CSGSITools_Form";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Style = MetroFramework.MetroColorStyle.Default;
             this.Text = "CSGSI Tools";
@@ -671,8 +680,8 @@
             this.groupBox3.PerformLayout();
             this.metroTab_csgsiTools.ResumeLayout(false);
             this.CSGOStateTabPage.ResumeLayout(false);
-            this.metroTabPage1.ResumeLayout(false);
-            this.metroTabPage1.PerformLayout();
+            this.info_tab.ResumeLayout(false);
+            this.info_tab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Github)).EndInit();
             this.metroPanel10.ResumeLayout(false);
             this.metroPanel10.PerformLayout();
@@ -683,7 +692,7 @@
 
         #endregion
         private System.Windows.Forms.Label lbl_playerstate;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_playerStateLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_bombCurrentState;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -703,7 +712,7 @@
         private MetroFramework.Controls.MetroLabel lbl_infoversion;
         private MetroFramework.Controls.MetroComboBox combo_states;
         private MetroFramework.Controls.MetroProgressSpinner ps_status;
-        private MetroFramework.Controls.MetroTabPage metroTabPage1;
+        private MetroFramework.Controls.MetroTabPage info_tab;
         private MetroFramework.Controls.MetroLink metroLink_spkMusic;
         private MetroFramework.Controls.MetroLink metroLink_spk;
         private MetroFramework.Controls.MetroLabel metroLabel9;
