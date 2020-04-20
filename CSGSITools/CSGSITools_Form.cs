@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace CSGSITools
 {
-    public partial class Form1 : MetroFramework.Forms.MetroForm
+    public partial class CSGSITools_Form : MetroFramework.Forms.MetroForm
     {
         #region test
         private ISteam006 steam006;
@@ -96,11 +96,12 @@ namespace CSGSITools
         private static readonly int[] stats = new int[3] { 0, 0, 0 }; //Kills, Assists, Deaths
 
         private static string csgoCFGPath;
+        private static bool CheckCSGO = true;
 
-        public Form1()
+        public CSGSITools_Form()
         {
             InitializeComponent();
-            Worker_GSI.RunWorkerAsync();
+            // Worker_GSI.RunWorkerAsync();
             Trolha.Tick += Trolha_Tick;
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -114,6 +115,8 @@ namespace CSGSITools
             Worker_CheckCSGO.RunWorkerAsync("CheckCSGOProcess");
             LoadSteam();
 
+            gslStart();
+
         }
 
         public static void LoadCSGOFolder()
@@ -122,7 +125,7 @@ namespace CSGSITools
             csgoCFGPath = csgoPath + @"\csgo\cfg\";
 
             DirectoryInfo d = new DirectoryInfo(csgoCFGPath);
-            FileInfo[] Files = d.GetFiles("gamestate_integration_teste.cfg"); 
+            FileInfo[] Files = d.GetFiles("gamestate_integration_teste.cfg");
 
             if (Files.Length == 0)
             {
@@ -137,8 +140,7 @@ namespace CSGSITools
             }
         }
 
-
-        private void Worker_GSI_DoWork(object sender, DoWorkEventArgs e)
+        private void gslStart()
         {
             gsl = new GameStateListener(3000);
             gsl.NewGameState += new NewGameStateHandler(CurrentBombState);
@@ -150,18 +152,20 @@ namespace CSGSITools
             {
                 Environment.Exit(0);
             }
+
         }
+
 
         private void CheckCSGOProcess()
         {
             Process[] ps = Process.GetProcessesByName("csgo");
             if (ps.Length == 0)
             {
-                MessageBox.Show("Starting csgo for you... restarting "+ Program.AppName + " in 15sec.", Program.AppName,
+                MessageBox.Show("Starting csgo for you... restarting " + Program.AppName + " in 15sec.", Program.AppName,
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Process.Start("steam://run/730");
-                
+
                 Thread.Sleep(15000);
                 Process.Start(Application.ExecutablePath);
                 Application.Exit();
@@ -281,45 +285,46 @@ namespace CSGSITools
 
         private void CurrentBombState(GameState gs)
         {
-            if (!IsPlanted &&
-               gs.Round.Phase == RoundPhase.Live &&
-               gs.Round.Bomb == BombState.Planted &&
-               gs.Previously.Round.Bomb == BombState.Undefined)
-            {
 
+
+
+            if (gs.Round.Phase == RoundPhase.Live &&
+               gs.Bomb.State == BombState.Planted &&
+               gs.Previously.Bomb.State == BombState.Planting)
+            {
+                lbl_bombCurrentState.ForeColor = Color.Red;
                 lbl_bombCurrentState.Text = "Bomb has been planted.";
-                lbl_bombCurrentState.ForeColor = Color.Red;
-                IsPlanted = true;
 
-            }
-            else if (gs.Round.Bomb != BombState.Exploded)
-            {
-             
-                IsPlanted = false;
-                lbl_bombCurrentState.ForeColor = Color.Red;
-                lbl_bombCurrentState.Text = "Bomb not planted.";
+                IsPlanted = true;
 
             }
             else if (gs.Round.Bomb == BombState.Exploded)
             {
-
-                lbl_bombCurrentState.Text = "Exploded.";
                 lbl_bombCurrentState.ForeColor = Color.Red;
+                lbl_bombCurrentState.Text = "Exploded.";
+
 
             }
             else if (gs.Round.Bomb == BombState.Defused)
             {
-
-                lbl_bombCurrentState.Text = "Defused.";
                 lbl_bombCurrentState.ForeColor = Color.DodgerBlue;
+                lbl_bombCurrentState.Text = "Defused.";
+
 
             }
-            else if (IsPlanted && gs.Round.Phase == RoundPhase.FreezeTime)
+            else if (gs.Round.Phase == RoundPhase.FreezeTime)
             {
                 IsPlanted = false;
+                lbl_bombCurrentState.ForeColor = Color.Blue;
                 lbl_bombCurrentState.Text = "Bomb not planted.";
-                lbl_bombCurrentState.ForeColor = Color.Black;
 
+
+            }
+            else if (gs.Round.Phase == RoundPhase.Live)
+            {
+                IsPlanted = false;
+                lbl_bombCurrentState.ForeColor = Color.DarkRed;
+                lbl_bombCurrentState.Text = "Bomb not planted yet.";
             }
             else
             {
@@ -336,14 +341,14 @@ namespace CSGSITools
             if (gs.Round.Phase == RoundPhase.Over)
             {
 
-                lbl_currentRoundState.Text = "ROUND OVER: " + gs.Round.WinTeam + " - WINS";
+                lbl_currentRoundState.Text = "OVER: " + gs.Round.WinTeam + " - WINS";
                 lbl_currentRoundState.ForeColor = Color.Red;
 
             }
             else if (gs.Round.Phase == RoundPhase.Live)
             {
                 lbl_currentRoundState.ForeColor = Color.DarkGreen;
-                lbl_currentRoundState.Text = "ROUND LIVE - GL HF!";
+                lbl_currentRoundState.Text = "LIVE";
 
                 lbl_currentMap.ForeColor = Color.DarkGreen;
 
@@ -372,11 +377,11 @@ namespace CSGSITools
             }
             else if (gs.Round.Phase == RoundPhase.Undefined)
             {
-                lbl_currentRoundState.Text = "No server.";
+                lbl_currentRoundState.Text = "No server";
                 lbl_currentRoundState.ForeColor = Color.Red;
 
                 lbl_currentMap.ForeColor = Color.Red;
-                lbl_currentMap.Text = "No server.";
+                lbl_currentMap.Text = "No server";
 
             }
             else if (gs.Round.Phase != RoundPhase.Undefined)
@@ -432,7 +437,7 @@ namespace CSGSITools
                     }
                     else
                     {
-
+                        
 
                     }
                     Thread.Sleep(20000);
@@ -561,7 +566,12 @@ namespace CSGSITools
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            gsl.Stop();
+            if (gsl != null)
+            {
+                gsl.Stop();
+            }
+
+
             Application.ExitThread();
             Environment.Exit(0);
         }

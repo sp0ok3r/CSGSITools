@@ -1,6 +1,6 @@
 ﻿namespace CSGSITools
 {
-    partial class Form1
+    partial class CSGSITools_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.Worker_GSI = new System.ComponentModel.BackgroundWorker();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CSGSITools_Form));
             this.lbl_playerstate = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,7 +48,6 @@
             this.Worker_CheckCSGO = new System.ComponentModel.BackgroundWorker();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.metroTab_csgsiTools = new MetroFramework.Controls.MetroTabControl();
             this.CSGOStateTabPage = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
@@ -85,14 +83,10 @@
             this.metroPanel10.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Worker_GSI
-            // 
-            this.Worker_GSI.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_GSI_DoWork);
-            // 
             // lbl_playerstate
             // 
             this.lbl_playerstate.AutoSize = true;
-            this.lbl_playerstate.Location = new System.Drawing.Point(100, 52);
+            this.lbl_playerstate.Location = new System.Drawing.Point(83, 60);
             this.lbl_playerstate.Name = "lbl_playerstate";
             this.lbl_playerstate.Size = new System.Drawing.Size(79, 15);
             this.lbl_playerstate.TabIndex = 1;
@@ -101,7 +95,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 54);
+            this.label1.Location = new System.Drawing.Point(6, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 15);
             this.label1.TabIndex = 2;
@@ -110,7 +104,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 128);
+            this.label2.Location = new System.Drawing.Point(7, 134);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 15);
             this.label2.TabIndex = 2;
@@ -119,7 +113,7 @@
             // lbl_bombCurrentState
             // 
             this.lbl_bombCurrentState.AutoSize = true;
-            this.lbl_bombCurrentState.Location = new System.Drawing.Point(100, 128);
+            this.lbl_bombCurrentState.Location = new System.Drawing.Point(83, 134);
             this.lbl_bombCurrentState.Name = "lbl_bombCurrentState";
             this.lbl_bombCurrentState.Size = new System.Drawing.Size(79, 15);
             this.lbl_bombCurrentState.TabIndex = 1;
@@ -140,7 +134,7 @@
             // chk_autofocusFrezzeTime
             // 
             this.chk_autofocusFrezzeTime.AutoSize = true;
-            this.chk_autofocusFrezzeTime.Location = new System.Drawing.Point(19, 67);
+            this.chk_autofocusFrezzeTime.Location = new System.Drawing.Point(24, 67);
             this.chk_autofocusFrezzeTime.Name = "chk_autofocusFrezzeTime";
             this.chk_autofocusFrezzeTime.Size = new System.Drawing.Size(241, 15);
             this.chk_autofocusFrezzeTime.Style = MetroFramework.MetroColorStyle.Blue;
@@ -154,7 +148,7 @@
             // chk_autofocus
             // 
             this.chk_autofocus.AutoSize = true;
-            this.chk_autofocus.Location = new System.Drawing.Point(19, 36);
+            this.chk_autofocus.Location = new System.Drawing.Point(24, 31);
             this.chk_autofocus.Name = "chk_autofocus";
             this.chk_autofocus.Size = new System.Drawing.Size(177, 15);
             this.chk_autofocus.Style = MetroFramework.MetroColorStyle.Blue;
@@ -190,9 +184,9 @@
             "Snooze 💤",
             "LookingToTrade",
             "LookingToPlay"});
-            this.combo_states.Location = new System.Drawing.Point(19, 22);
+            this.combo_states.Location = new System.Drawing.Point(6, 22);
             this.combo_states.Name = "combo_states";
-            this.combo_states.Size = new System.Drawing.Size(306, 29);
+            this.combo_states.Size = new System.Drawing.Size(319, 29);
             this.combo_states.TabIndex = 17;
             this.combo_states.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.combo_states.UseSelectable = true;
@@ -202,7 +196,7 @@
             // chk_stayState
             // 
             this.chk_stayState.AutoSize = true;
-            this.chk_stayState.Location = new System.Drawing.Point(19, 57);
+            this.chk_stayState.Location = new System.Drawing.Point(6, 57);
             this.chk_stayState.Name = "chk_stayState";
             this.chk_stayState.Size = new System.Drawing.Size(240, 19);
             this.chk_stayState.TabIndex = 8;
@@ -224,7 +218,7 @@
             this.groupBox3.ForeColor = System.Drawing.Color.White;
             this.groupBox3.Location = new System.Drawing.Point(0, 14);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(223, 203);
+            this.groupBox3.Size = new System.Drawing.Size(239, 203);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Game State";
@@ -232,7 +226,7 @@
             // lbl_roundState
             // 
             this.lbl_roundState.AutoSize = true;
-            this.lbl_roundState.Location = new System.Drawing.Point(24, 101);
+            this.lbl_roundState.Location = new System.Drawing.Point(7, 107);
             this.lbl_roundState.Name = "lbl_roundState";
             this.lbl_roundState.Size = new System.Drawing.Size(74, 15);
             this.lbl_roundState.TabIndex = 6;
@@ -241,7 +235,7 @@
             // lbl_currentRoundState
             // 
             this.lbl_currentRoundState.AutoSize = true;
-            this.lbl_currentRoundState.Location = new System.Drawing.Point(100, 101);
+            this.lbl_currentRoundState.Location = new System.Drawing.Point(83, 107);
             this.lbl_currentRoundState.Name = "lbl_currentRoundState";
             this.lbl_currentRoundState.Size = new System.Drawing.Size(79, 15);
             this.lbl_currentRoundState.TabIndex = 5;
@@ -250,7 +244,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(60, 30);
+            this.label3.Location = new System.Drawing.Point(43, 36);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 15);
             this.label3.TabIndex = 4;
@@ -259,7 +253,7 @@
             // lbl_currentMap
             // 
             this.lbl_currentMap.AutoSize = true;
-            this.lbl_currentMap.Location = new System.Drawing.Point(100, 30);
+            this.lbl_currentMap.Location = new System.Drawing.Point(83, 36);
             this.lbl_currentMap.Name = "lbl_currentMap";
             this.lbl_currentMap.Size = new System.Drawing.Size(79, 15);
             this.lbl_currentMap.TabIndex = 3;
@@ -642,7 +636,7 @@
             this.Trolha.Interval = 3000;
             this.Trolha.Tick += new System.EventHandler(this.Trolha_Tick);
             // 
-            // Form1
+            // CSGSITools_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -655,7 +649,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "CSGSITools_Form";
             this.Resizable = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Style = MetroFramework.MetroColorStyle.Default;
@@ -681,8 +675,6 @@
         }
 
         #endregion
-
-        private System.ComponentModel.BackgroundWorker Worker_GSI;
         private System.Windows.Forms.Label lbl_playerstate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -698,7 +690,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chk_stayState;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private MetroFramework.Controls.MetroTabControl metroTab_csgsiTools;
         private MetroFramework.Controls.MetroTabPage CSGOStateTabPage;
         private MetroFramework.Controls.MetroTextBox txtBox_steamID;
