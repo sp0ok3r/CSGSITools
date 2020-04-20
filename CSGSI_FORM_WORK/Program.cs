@@ -2,11 +2,11 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace CSGSI2
+namespace CSGSITools
 {
     static class Program
     {
-        public static string AppName = "Sp0ok3rTools";
+        public static string AppName = "CSGSITools";
         public static string Version = "1.0.0";
 
         public static readonly Process[] CurrentProcesses = Process.GetProcesses();

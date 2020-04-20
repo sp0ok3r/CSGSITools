@@ -1,4 +1,4 @@
-﻿namespace CSGSI2
+﻿namespace CSGSITools
 {
     partial class Form1
     {
@@ -196,7 +196,7 @@
             this.groupBox1.Size = new System.Drawing.Size(331, 85);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "StateChooser";
+            this.groupBox1.Text = "Steam State Chooser";
             // 
             // combo_states
             // 
@@ -559,7 +559,7 @@
             // pictureBox_Github
             // 
             this.pictureBox_Github.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox_Github.Image = global::CSGSI2.Properties.Resources.github_logo;
+            this.pictureBox_Github.Image = global::CSGSITools.Properties.Resources.github_logo;
             this.pictureBox_Github.Location = new System.Drawing.Point(154, 98);
             this.pictureBox_Github.Name = "pictureBox_Github";
             this.pictureBox_Github.Size = new System.Drawing.Size(33, 34);
@@ -620,9 +620,9 @@
             this.metroPanel10.HorizontalScrollbarBarColor = true;
             this.metroPanel10.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel10.HorizontalScrollbarSize = 10;
-            this.metroPanel10.Location = new System.Drawing.Point(0, 307);
+            this.metroPanel10.Location = new System.Drawing.Point(-6, 307);
             this.metroPanel10.Name = "metroPanel10";
-            this.metroPanel10.Size = new System.Drawing.Size(625, 22);
+            this.metroPanel10.Size = new System.Drawing.Size(615, 22);
             this.metroPanel10.TabIndex = 23;
             this.metroPanel10.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroPanel10.UseCustomBackColor = true;
@@ -633,7 +633,7 @@
             // 
             // ps_status
             // 
-            this.ps_status.Location = new System.Drawing.Point(603, 3);
+            this.ps_status.Location = new System.Drawing.Point(587, 3);
             this.ps_status.Maximum = 100;
             this.ps_status.Name = "ps_status";
             this.ps_status.Size = new System.Drawing.Size(16, 16);
@@ -668,7 +668,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 328);
+            this.ClientSize = new System.Drawing.Size(606, 328);
             this.Controls.Add(this.txtBox_steamID);
             this.Controls.Add(this.lbl_setSteamID64);
             this.Controls.Add(this.metroPanel10);

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Steam4NET;
 
-namespace CSGSI2
+namespace CSGSITools
 {
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
