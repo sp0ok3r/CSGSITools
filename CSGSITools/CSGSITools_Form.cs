@@ -19,14 +19,14 @@ namespace CSGSITools
     public partial class CSGSITools_Form : MetroFramework.Forms.MetroForm
     {
         #region test
-        private ISteam006 steam006;
-        private ISteamClient012 steamclient;
-        private ISteamUser016 steamuser;
-        private ISteamFriends013 steamfriends013;
-        private ISteamFriends002 steamfriends002;
-        private int user;
-        private int pipe;
-        private CSteamID steamid;
+        private static ISteam006 steam006;
+        private static ISteamClient012 steamclient;
+        private static ISteamUser016 steamuser;
+        private static ISteamFriends013 steamfriends013;
+        private static ISteamFriends002 steamfriends002;
+        private static int user;
+        private static int pipe;
+        private static CSteamID steamid;
         private EPersonaState CurrentState;
 
         private int LoadSteam()
@@ -98,19 +98,19 @@ namespace CSGSITools
         public CSGSITools_Form()
         {
             InitializeComponent();
+            TrolhaTimer.Tick += TrolhaTimer_Tick;
             lbl_version.Text = Program.Version;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             LoadCSGOFolder();
             metroTab_csgsiTools.SelectedIndex = 0;
             ps_status.Visible = true;
             CheckCSGOProcess();
 
             LoadSteam();
-
             gslStart();
-
         }
 
         public static void LoadCSGOFolder()
@@ -439,16 +439,16 @@ namespace CSGSITools
         
         public static void SetStatus(int Number)
         {
-            Steamworks.Load(true);
-            ISteamClient006 client = Steamworks.CreateInterface<ISteamClient006>();
-            int hSteamPipe = client.CreateSteamPipe();
-            int hSteamUser = client.ConnectToGlobalUser(hSteamPipe);
-            ISteamUser004 iSteamUser = client.GetISteamUser<ISteamUser004>(hSteamUser, hSteamPipe);
-            ISteamFriends003 iSteamFriends = client.GetISteamFriends<ISteamFriends003>(hSteamUser, hSteamPipe);
-            ISteamFriends001 PersonaStateChange = client.GetISteamFriends<ISteamFriends001>(hSteamUser, hSteamPipe);
             EPersonaState ePersonaState = (EPersonaState)int.Parse(Number.ToString());
-            PersonaStateChange.SetPersonaState(ePersonaState);
+            steamfriends002.SetPersonaState(ePersonaState);
         }
+
+        private void TrolhaTimer_Tick(object sender, EventArgs e)
+        {
+            var abc = steamfriends002.GetFriendPersonaState(steamid.ConvertToUint64());
+            lbl_currentSteamState.Text = abc.ToString().Replace("k_EPersonaState", "");
+        }
+
 
         #region ComboBox_Select_States_steam
         private void combo_states_SelectedIndexChanged(object sender, EventArgs e)
@@ -600,5 +600,7 @@ namespace CSGSITools
 
             return null;
         }
+
+        
     }
 }
