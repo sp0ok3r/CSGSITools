@@ -36,9 +36,15 @@
             this.chk_autofocusFrezzeTime = new MetroFramework.Controls.MetroCheckBox();
             this.chk_autofocus = new MetroFramework.Controls.MetroCheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbl_currentSteamState = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.combo_states = new MetroFramework.Controls.MetroComboBox();
             this.chk_stayState = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lbl_playerStateLabel = new MetroFramework.Controls.MetroLabel();
+            this.lbl_bombState = new MetroFramework.Controls.MetroLabel();
+            this.lbl_roundState = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.lbl_currentRoundState = new System.Windows.Forms.Label();
             this.lbl_currentMap = new System.Windows.Forms.Label();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -69,12 +75,6 @@
             this.ps_status = new MetroFramework.Controls.MetroProgressSpinner();
             this.lbl_infoversion = new MetroFramework.Controls.MetroLabel();
             this.TrolhaTimer = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.lbl_currentSteamState = new System.Windows.Forms.Label();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.lbl_roundState = new MetroFramework.Controls.MetroLabel();
-            this.lbl_bombState = new MetroFramework.Controls.MetroLabel();
-            this.lbl_playerStateLabel = new MetroFramework.Controls.MetroLabel();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -160,6 +160,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Steam State Chooser";
             // 
+            // lbl_currentSteamState
+            // 
+            this.lbl_currentSteamState.AutoSize = true;
+            this.lbl_currentSteamState.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_currentSteamState.ForeColor = System.Drawing.Color.Green;
+            this.lbl_currentSteamState.Location = new System.Drawing.Point(87, 23);
+            this.lbl_currentSteamState.Name = "lbl_currentSteamState";
+            this.lbl_currentSteamState.Size = new System.Drawing.Size(16, 13);
+            this.lbl_currentSteamState.TabIndex = 7;
+            this.lbl_currentSteamState.Text = "...";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Current State:";
+            // 
             // combo_states
             // 
             this.combo_states.FormattingEnabled = true;
@@ -211,6 +232,54 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Game State";
             // 
+            // lbl_playerStateLabel
+            // 
+            this.lbl_playerStateLabel.AutoSize = true;
+            this.lbl_playerStateLabel.Location = new System.Drawing.Point(0, 115);
+            this.lbl_playerStateLabel.Name = "lbl_playerStateLabel";
+            this.lbl_playerStateLabel.Size = new System.Drawing.Size(49, 19);
+            this.lbl_playerStateLabel.TabIndex = 50;
+            this.lbl_playerStateLabel.Text = "Player:";
+            this.lbl_playerStateLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.lbl_playerStateLabel.UseCustomBackColor = true;
+            this.lbl_playerStateLabel.UseStyleColors = true;
+            // 
+            // lbl_bombState
+            // 
+            this.lbl_bombState.AutoSize = true;
+            this.lbl_bombState.Location = new System.Drawing.Point(1, 148);
+            this.lbl_bombState.Name = "lbl_bombState";
+            this.lbl_bombState.Size = new System.Drawing.Size(48, 19);
+            this.lbl_bombState.TabIndex = 49;
+            this.lbl_bombState.Text = "Bomb:";
+            this.lbl_bombState.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.lbl_bombState.UseCustomBackColor = true;
+            this.lbl_bombState.UseStyleColors = true;
+            // 
+            // lbl_roundState
+            // 
+            this.lbl_roundState.AutoSize = true;
+            this.lbl_roundState.Location = new System.Drawing.Point(-1, 91);
+            this.lbl_roundState.Name = "lbl_roundState";
+            this.lbl_roundState.Size = new System.Drawing.Size(50, 19);
+            this.lbl_roundState.TabIndex = 48;
+            this.lbl_roundState.Text = "Round:";
+            this.lbl_roundState.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.lbl_roundState.UseCustomBackColor = true;
+            this.lbl_roundState.UseStyleColors = true;
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(10, 50);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(39, 19);
+            this.metroLabel1.TabIndex = 47;
+            this.metroLabel1.Text = "Map:";
+            this.metroLabel1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel1.UseCustomBackColor = true;
+            this.metroLabel1.UseStyleColors = true;
+            // 
             // lbl_currentRoundState
             // 
             this.lbl_currentRoundState.AutoSize = true;
@@ -243,7 +312,7 @@
             this.metroTab_csgsiTools.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroTab_csgsiTools.Location = new System.Drawing.Point(13, 46);
             this.metroTab_csgsiTools.Name = "metroTab_csgsiTools";
-            this.metroTab_csgsiTools.SelectedIndex = 1;
+            this.metroTab_csgsiTools.SelectedIndex = 0;
             this.metroTab_csgsiTools.ShowToolTips = true;
             this.metroTab_csgsiTools.Size = new System.Drawing.Size(584, 264);
             this.metroTab_csgsiTools.TabIndex = 1;
@@ -620,75 +689,6 @@
             this.TrolhaTimer.Enabled = true;
             this.TrolhaTimer.Interval = 3000;
             this.TrolhaTimer.Tick += new System.EventHandler(this.TrolhaTimer_Tick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Current State:";
-            // 
-            // lbl_currentSteamState
-            // 
-            this.lbl_currentSteamState.AutoSize = true;
-            this.lbl_currentSteamState.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_currentSteamState.ForeColor = System.Drawing.Color.Green;
-            this.lbl_currentSteamState.Location = new System.Drawing.Point(87, 23);
-            this.lbl_currentSteamState.Name = "lbl_currentSteamState";
-            this.lbl_currentSteamState.Size = new System.Drawing.Size(16, 13);
-            this.lbl_currentSteamState.TabIndex = 7;
-            this.lbl_currentSteamState.Text = "...";
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(10, 50);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(39, 19);
-            this.metroLabel1.TabIndex = 47;
-            this.metroLabel1.Text = "Map:";
-            this.metroLabel1.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroLabel1.UseCustomBackColor = true;
-            this.metroLabel1.UseStyleColors = true;
-            // 
-            // lbl_roundState
-            // 
-            this.lbl_roundState.AutoSize = true;
-            this.lbl_roundState.Location = new System.Drawing.Point(-1, 91);
-            this.lbl_roundState.Name = "lbl_roundState";
-            this.lbl_roundState.Size = new System.Drawing.Size(50, 19);
-            this.lbl_roundState.TabIndex = 48;
-            this.lbl_roundState.Text = "Round:";
-            this.lbl_roundState.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.lbl_roundState.UseCustomBackColor = true;
-            this.lbl_roundState.UseStyleColors = true;
-            // 
-            // lbl_bombState
-            // 
-            this.lbl_bombState.AutoSize = true;
-            this.lbl_bombState.Location = new System.Drawing.Point(1, 148);
-            this.lbl_bombState.Name = "lbl_bombState";
-            this.lbl_bombState.Size = new System.Drawing.Size(48, 19);
-            this.lbl_bombState.TabIndex = 49;
-            this.lbl_bombState.Text = "Bomb:";
-            this.lbl_bombState.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.lbl_bombState.UseCustomBackColor = true;
-            this.lbl_bombState.UseStyleColors = true;
-            // 
-            // lbl_playerStateLabel
-            // 
-            this.lbl_playerStateLabel.AutoSize = true;
-            this.lbl_playerStateLabel.Location = new System.Drawing.Point(0, 115);
-            this.lbl_playerStateLabel.Name = "lbl_playerStateLabel";
-            this.lbl_playerStateLabel.Size = new System.Drawing.Size(49, 19);
-            this.lbl_playerStateLabel.TabIndex = 50;
-            this.lbl_playerStateLabel.Text = "Player:";
-            this.lbl_playerStateLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.lbl_playerStateLabel.UseCustomBackColor = true;
-            this.lbl_playerStateLabel.UseStyleColors = true;
             // 
             // CSGSITools_Form
             // 
