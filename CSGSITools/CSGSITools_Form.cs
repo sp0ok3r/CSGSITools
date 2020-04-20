@@ -76,8 +76,6 @@ namespace CSGSITools
         #endregion
 
         GameStateListener gsl;
-        Thread Th_CheckCSGOProcess;
-
 
         public static bool IsPlanted;
         public static PlayerActivity Activity = PlayerActivity.Undefined;
@@ -96,13 +94,11 @@ namespace CSGSITools
         private static readonly int[] stats = new int[3] { 0, 0, 0 }; //Kills, Assists, Deaths
 
         private static string csgoCFGPath;
-        private static bool CheckCSGO = true;
 
         public CSGSITools_Form()
         {
             InitializeComponent();
-            // Worker_GSI.RunWorkerAsync();
-            Trolha.Tick += Trolha_Tick;
+            lbl_version.Text = Program.Version;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -111,8 +107,6 @@ namespace CSGSITools
             ps_status.Visible = true;
             CheckCSGOProcess();
 
-            Worker_CheckCSGO.DoWork += Worker_CheckCSGO_DoWork;
-            Worker_CheckCSGO.RunWorkerAsync("CheckCSGOProcess");
             LoadSteam();
 
             gslStart();
@@ -287,9 +281,6 @@ namespace CSGSITools
 
         private void CurrentBombState(GameState gs)
         {
-
-
-
             if (gs.Round.Phase == RoundPhase.Live &&
                gs.Bomb.State == BombState.Planted &&
                gs.Previously.Bomb.State == BombState.Planting)
@@ -391,7 +382,7 @@ namespace CSGSITools
             {
                 lbl_currentMap.Text = gs.Map.Name;
 
-                
+
 
             }
             else
@@ -419,39 +410,6 @@ namespace CSGSITools
             }
         }
         #endregion
-
-
-        private void Worker_CheckCSGO_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                Th_CheckCSGOProcess = Thread.CurrentThread;
-                while (true)
-                {
-
-
-                    if (Process.GetProcessesByName("csgo").Length == 0)
-                    {
-                        MessageBox.Show("Please start csgo..., restarting in 25 secs.", Program.AppName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        System.Windows.Forms.Application.Restart();
-                        Thread.Sleep(25000);
-                    }
-                    else
-                    {
-
-
-                    }
-                    Thread.Sleep(20000);
-                }
-
-            }
-            catch (ThreadAbortException)
-            {
-                MessageBox.Show("?", "Sp0ok3r SteamTools", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-
 
         #region WindowMover
 
@@ -558,11 +516,6 @@ namespace CSGSITools
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         private static extern IntPtr GetForegroundWindow();
-        void Trolha_Tick(object sender, EventArgs e)
-        {
-            Console.WriteLine("o " + getActiveWindowName());
-
-        }
 
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -581,7 +534,7 @@ namespace CSGSITools
         #region LINKS
         private void pictureBox_Github_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/sp0ok3r/Mercury");
+            Process.Start("https://github.com/sp0ok3r/CSGSITools");
         }
 
         private void metroLink_spk_Click(object sender, EventArgs e)
@@ -602,6 +555,21 @@ namespace CSGSITools
         private void metroLink_Rakijah_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/rakijah/CSGSI");
+        }
+
+        private void metroLink_Json_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.newtonsoft.com/json");
+        }
+
+        private void metroLink_Steam4net_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/SteamRE/Steam4NET");
+        }
+
+        private void metroLink_Metro_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://denricdenise.info/metroframework-faq/");
         }
         #endregion
 

@@ -8,7 +8,7 @@ namespace CSGSITools
     static class Program
     {
         public static string AppName = "CSGSITools";
-        public static string Version = "1.0.0";
+        public static string Version = "1.0.0beta";
 
         public static readonly string ExecutablePath = Path.GetDirectoryName(Application.ExecutablePath);
 

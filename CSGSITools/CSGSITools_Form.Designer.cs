@@ -39,12 +39,12 @@
             this.chk_autofocus = new MetroFramework.Controls.MetroCheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.combo_states = new MetroFramework.Controls.MetroComboBox();
+            this.chk_stayState = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lbl_roundState = new System.Windows.Forms.Label();
             this.lbl_currentRoundState = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lbl_currentMap = new System.Windows.Forms.Label();
-            this.Worker_CheckCSGO = new System.ComponentModel.BackgroundWorker();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.metroTab_csgsiTools = new MetroFramework.Controls.MetroTabControl();
@@ -71,8 +71,7 @@
             this.metroPanel10 = new MetroFramework.Controls.MetroPanel();
             this.ps_status = new MetroFramework.Controls.MetroProgressSpinner();
             this.lbl_infoversion = new MetroFramework.Controls.MetroLabel();
-            this.Trolha = new System.Windows.Forms.Timer(this.components);
-            this.chk_stayState = new System.Windows.Forms.CheckBox();
+            this.lbl_version = new MetroFramework.Controls.MetroLabel();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -193,6 +192,17 @@
             this.combo_states.UseStyleColors = true;
             this.combo_states.SelectedIndexChanged += new System.EventHandler(this.combo_states_SelectedIndexChanged);
             // 
+            // chk_stayState
+            // 
+            this.chk_stayState.AutoSize = true;
+            this.chk_stayState.Location = new System.Drawing.Point(6, 57);
+            this.chk_stayState.Name = "chk_stayState";
+            this.chk_stayState.Size = new System.Drawing.Size(151, 19);
+            this.chk_stayState.TabIndex = 8;
+            this.chk_stayState.Text = "stay in the state defined";
+            this.toolTip.SetToolTip(this.chk_stayState, "(soon) When the round starts, csgo window will open for you.");
+            this.chk_stayState.UseVisualStyleBackColor = true;
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.lbl_roundState);
@@ -248,10 +258,6 @@
             this.lbl_currentMap.TabIndex = 3;
             this.lbl_currentMap.Text = "(currentState)";
             // 
-            // Worker_CheckCSGO
-            // 
-            this.Worker_CheckCSGO.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_CheckCSGO_DoWork);
-            // 
             // notifyIcon
             // 
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
@@ -265,7 +271,7 @@
             this.metroTab_csgsiTools.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroTab_csgsiTools.Location = new System.Drawing.Point(13, 46);
             this.metroTab_csgsiTools.Name = "metroTab_csgsiTools";
-            this.metroTab_csgsiTools.SelectedIndex = 0;
+            this.metroTab_csgsiTools.SelectedIndex = 1;
             this.metroTab_csgsiTools.Size = new System.Drawing.Size(584, 264);
             this.metroTab_csgsiTools.TabIndex = 7;
             this.metroTab_csgsiTools.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -365,6 +371,7 @@
             this.metroLink_Metro.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroLink_Metro.UseCustomBackColor = true;
             this.metroLink_Metro.UseSelectable = true;
+            this.metroLink_Metro.Click += new System.EventHandler(this.metroLink_Metro_Click);
             // 
             // metroLink_Rakijah
             // 
@@ -390,6 +397,7 @@
             this.metroLink_Steam4net.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroLink_Steam4net.UseCustomBackColor = true;
             this.metroLink_Steam4net.UseSelectable = true;
+            this.metroLink_Steam4net.Click += new System.EventHandler(this.metroLink_Steam4net_Click);
             // 
             // metroLink_Json
             // 
@@ -402,6 +410,7 @@
             this.metroLink_Json.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroLink_Json.UseCustomBackColor = true;
             this.metroLink_Json.UseSelectable = true;
+            this.metroLink_Json.Click += new System.EventHandler(this.metroLink_Json_Click);
             // 
             // metroLabel3
             // 
@@ -467,6 +476,7 @@
             // metroLink_spkMusic
             // 
             this.metroLink_spkMusic.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroLink_spkMusic.FontWeight = MetroFramework.MetroLinkWeight.Regular;
             this.metroLink_spkMusic.Location = new System.Drawing.Point(248, 64);
             this.metroLink_spkMusic.Name = "metroLink_spkMusic";
             this.metroLink_spkMusic.Size = new System.Drawing.Size(20, 16);
@@ -576,6 +586,7 @@
             // metroPanel10
             // 
             this.metroPanel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.metroPanel10.Controls.Add(this.lbl_version);
             this.metroPanel10.Controls.Add(this.ps_status);
             this.metroPanel10.Controls.Add(this.lbl_infoversion);
             this.metroPanel10.HorizontalScrollbarBarColor = true;
@@ -619,22 +630,17 @@
             this.lbl_infoversion.UseCustomBackColor = true;
             this.lbl_infoversion.UseStyleColors = true;
             // 
-            // Trolha
+            // lbl_version
             // 
-            this.Trolha.Enabled = true;
-            this.Trolha.Interval = 3000;
-            this.Trolha.Tick += new System.EventHandler(this.Trolha_Tick);
-            // 
-            // chk_stayState
-            // 
-            this.chk_stayState.AutoSize = true;
-            this.chk_stayState.Location = new System.Drawing.Point(6, 57);
-            this.chk_stayState.Name = "chk_stayState";
-            this.chk_stayState.Size = new System.Drawing.Size(151, 19);
-            this.chk_stayState.TabIndex = 8;
-            this.chk_stayState.Text = "stay in the state defined";
-            this.toolTip.SetToolTip(this.chk_stayState, "(soon) When the round starts, csgo window will open for you.");
-            this.chk_stayState.UseVisualStyleBackColor = true;
+            this.lbl_version.AutoSize = true;
+            this.lbl_version.Location = new System.Drawing.Point(3, 0);
+            this.lbl_version.Name = "lbl_version";
+            this.lbl_version.Size = new System.Drawing.Size(59, 19);
+            this.lbl_version.TabIndex = 82;
+            this.lbl_version.Text = "(Version)";
+            this.lbl_version.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.lbl_version.UseCustomBackColor = true;
+            this.lbl_version.UseStyleColors = true;
             // 
             // CSGSITools_Form
             // 
@@ -669,6 +675,7 @@
             this.metroTabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Github)).EndInit();
             this.metroPanel10.ResumeLayout(false);
+            this.metroPanel10.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -684,7 +691,6 @@
         private System.Windows.Forms.Label lbl_currentRoundState;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbl_currentMap;
-        private System.ComponentModel.BackgroundWorker Worker_CheckCSGO;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -696,7 +702,6 @@
         private MetroFramework.Controls.MetroPanel metroPanel10;
         private MetroFramework.Controls.MetroLabel lbl_infoversion;
         private MetroFramework.Controls.MetroComboBox combo_states;
-        private System.Windows.Forms.Timer Trolha;
         private MetroFramework.Controls.MetroProgressSpinner ps_status;
         private MetroFramework.Controls.MetroTabPage metroTabPage1;
         private MetroFramework.Controls.MetroLink metroLink_spkMusic;
@@ -718,6 +723,7 @@
         private MetroFramework.Controls.MetroCheckBox chk_autofocus;
         private MetroFramework.Controls.MetroCheckBox chk_autofocusFrezzeTime;
         private System.Windows.Forms.CheckBox chk_stayState;
+        private MetroFramework.Controls.MetroLabel lbl_version;
     }
 }
 
