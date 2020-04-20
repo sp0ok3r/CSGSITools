@@ -218,23 +218,25 @@ namespace CSGSITools
 
             if (gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && Health == 0)
             {
-                lbl_playerstate.Text = "OOF!";
-                lbl_playerstate.ForeColor = Color.Red;
+
+                lbl_playerstate.Text = "Dead";
+
                 dead = true;
 
             }
             else if (gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && Health > 0)
             {
-
-                lbl_playerstate.Text = "ALIVE!";
                 lbl_playerstate.ForeColor = Color.DarkGreen;
+                lbl_playerstate.Text = "Alive";
+
                 dead = false;
 
             }
             else
             {
-                lbl_playerstate.Text = "No server.";
                 lbl_playerstate.ForeColor = Color.Red;
+                lbl_playerstate.Text = "No server";
+
             }
 
 
@@ -247,7 +249,7 @@ namespace CSGSITools
             }
             else if (gs.Player.State.Flashed > 0)
             {
-                lbl_playerstate.Text = "ALIVE! AND FLASHED";
+                lbl_playerstate.Text = "ALIVE AND FLASHED";
                 Flash = true;
             }
 
@@ -260,7 +262,7 @@ namespace CSGSITools
             else if (gs.Player.State.Smoked > 0)
             {
 
-                lbl_playerstate.Text = "ALIVE! AND SMOKED";
+                lbl_playerstate.Text = "ALIVE AND SMOKED";
                 Smoke = true;
             }
             //BURNING
@@ -272,7 +274,7 @@ namespace CSGSITools
             else if (gs.Player.State.Burning > 0)
             {
 
-                lbl_playerstate.Text = "ALIVE! AND BURNING";
+                lbl_playerstate.Text = "ALIVE AND BURNING";
                 Molly = true;
             }
 
@@ -293,7 +295,7 @@ namespace CSGSITools
                gs.Previously.Bomb.State == BombState.Planting)
             {
                 lbl_bombCurrentState.ForeColor = Color.Red;
-                lbl_bombCurrentState.Text = "Bomb has been planted.";
+                lbl_bombCurrentState.Text = "Bomb has been planted";
 
                 IsPlanted = true;
 
@@ -301,14 +303,14 @@ namespace CSGSITools
             else if (gs.Round.Bomb == BombState.Exploded)
             {
                 lbl_bombCurrentState.ForeColor = Color.Red;
-                lbl_bombCurrentState.Text = "Exploded.";
+                lbl_bombCurrentState.Text = "Exploded";
 
 
             }
             else if (gs.Round.Bomb == BombState.Defused)
             {
                 lbl_bombCurrentState.ForeColor = Color.DodgerBlue;
-                lbl_bombCurrentState.Text = "Defused.";
+                lbl_bombCurrentState.Text = "Defused";
 
 
             }
@@ -316,7 +318,7 @@ namespace CSGSITools
             {
                 IsPlanted = false;
                 lbl_bombCurrentState.ForeColor = Color.Blue;
-                lbl_bombCurrentState.Text = "Bomb not planted.";
+                lbl_bombCurrentState.Text = "Bomb not planted";
 
 
             }
@@ -324,13 +326,13 @@ namespace CSGSITools
             {
                 IsPlanted = false;
                 lbl_bombCurrentState.ForeColor = Color.DarkRed;
-                lbl_bombCurrentState.Text = "Bomb not planted yet.";
+                lbl_bombCurrentState.Text = "Bomb not planted yet";
             }
             else
             {
                 IsPlanted = false;
                 lbl_bombCurrentState.ForeColor = Color.Red;
-                lbl_bombCurrentState.Text = "No server.";
+                lbl_bombCurrentState.Text = "No server";
 
             }
         }
@@ -341,7 +343,7 @@ namespace CSGSITools
             if (gs.Round.Phase == RoundPhase.Over)
             {
 
-                lbl_currentRoundState.Text = "OVER: " + gs.Round.WinTeam + " - WINS";
+                lbl_currentRoundState.Text = gs.Round.WinTeam + " - WINS";
                 lbl_currentRoundState.ForeColor = Color.Red;
 
             }
@@ -360,8 +362,9 @@ namespace CSGSITools
             }
             else if (gs.Round.Phase == RoundPhase.FreezeTime)
             {
-                lbl_currentRoundState.Text = "* Freeze Time *";
                 lbl_currentRoundState.ForeColor = Color.DarkOrange;
+                lbl_currentRoundState.Text = "* Freeze Time *";
+
 
                 if (chk_autofocusFrezzeTime.Checked && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && gs.Player.State.Health == 100)
                 {
@@ -377,8 +380,8 @@ namespace CSGSITools
             }
             else if (gs.Round.Phase == RoundPhase.Undefined)
             {
-                lbl_currentRoundState.Text = "No server";
                 lbl_currentRoundState.ForeColor = Color.Red;
+                lbl_currentRoundState.Text = "No server";
 
                 lbl_currentMap.ForeColor = Color.Red;
                 lbl_currentMap.Text = "No server";
@@ -388,9 +391,7 @@ namespace CSGSITools
             {
                 lbl_currentMap.Text = gs.Map.Name;
 
-                if (chk_stayState.Checked)
-                {
-                }
+                
 
             }
             else
@@ -437,7 +438,7 @@ namespace CSGSITools
                     }
                     else
                     {
-                        
+
 
                     }
                     Thread.Sleep(20000);

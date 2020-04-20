@@ -39,7 +39,6 @@
             this.chk_autofocus = new MetroFramework.Controls.MetroCheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.combo_states = new MetroFramework.Controls.MetroComboBox();
-            this.chk_stayState = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lbl_roundState = new System.Windows.Forms.Label();
             this.lbl_currentRoundState = new System.Windows.Forms.Label();
@@ -73,6 +72,7 @@
             this.ps_status = new MetroFramework.Controls.MetroProgressSpinner();
             this.lbl_infoversion = new MetroFramework.Controls.MetroLabel();
             this.Trolha = new System.Windows.Forms.Timer(this.components);
+            this.chk_stayState = new System.Windows.Forms.CheckBox();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -192,17 +192,6 @@
             this.combo_states.UseSelectable = true;
             this.combo_states.UseStyleColors = true;
             this.combo_states.SelectedIndexChanged += new System.EventHandler(this.combo_states_SelectedIndexChanged);
-            // 
-            // chk_stayState
-            // 
-            this.chk_stayState.AutoSize = true;
-            this.chk_stayState.Location = new System.Drawing.Point(6, 57);
-            this.chk_stayState.Name = "chk_stayState";
-            this.chk_stayState.Size = new System.Drawing.Size(240, 19);
-            this.chk_stayState.TabIndex = 8;
-            this.chk_stayState.Text = "While in match, stay in the state defined.";
-            this.toolTip.SetToolTip(this.chk_stayState, "(soon) When the round starts, csgo window will open for you.");
-            this.chk_stayState.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -636,6 +625,17 @@
             this.Trolha.Interval = 3000;
             this.Trolha.Tick += new System.EventHandler(this.Trolha_Tick);
             // 
+            // chk_stayState
+            // 
+            this.chk_stayState.AutoSize = true;
+            this.chk_stayState.Location = new System.Drawing.Point(6, 57);
+            this.chk_stayState.Name = "chk_stayState";
+            this.chk_stayState.Size = new System.Drawing.Size(151, 19);
+            this.chk_stayState.TabIndex = 8;
+            this.chk_stayState.Text = "stay in the state defined";
+            this.toolTip.SetToolTip(this.chk_stayState, "(soon) When the round starts, csgo window will open for you.");
+            this.chk_stayState.UseVisualStyleBackColor = true;
+            // 
             // CSGSITools_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -688,7 +688,6 @@
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox chk_stayState;
         private System.Windows.Forms.GroupBox groupBox4;
         private MetroFramework.Controls.MetroTabControl metroTab_csgsiTools;
         private MetroFramework.Controls.MetroTabPage CSGOStateTabPage;
@@ -718,6 +717,7 @@
         private MetroFramework.Controls.MetroLink metroLink1;
         private MetroFramework.Controls.MetroCheckBox chk_autofocus;
         private MetroFramework.Controls.MetroCheckBox chk_autofocusFrezzeTime;
+        private System.Windows.Forms.CheckBox chk_stayState;
     }
 }
 
