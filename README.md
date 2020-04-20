@@ -12,6 +12,7 @@ CSGSITools is a CSGO Game State Integration, written in C# for the purpose of in
 ### Features
 * When Round Live focus on csgo process automatically
 * When Round Freeze Time focus on csgo process automatically
+* Change current steam friends state
 
 Lazy Bois Club
 
