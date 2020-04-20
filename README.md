@@ -4,7 +4,7 @@
 [![windows](https://img.shields.io/badge/platform-windows-blue.svg)](https://en.wikipedia.org/wiki/Microsoft_Windows)
 [![downloads](https://img.shields.io/github/downloads/sp0ok3r/CSGSITools/total.svg)](https://github.com/CSGSITools/Mercury)
 
-CSGSITools [☿](https://github.com/sp0ok3r/Mercury/) is a CSGO Game State Integracion, written in C# for the purpose of interacting with general csgo gsi stuff.
+CSGSITools is a CSGO Game State Integration, written in C# for the purpose of interacting with general csgo gsi stuff.
 
 ### Questions/Contact
 * http://steamcommunity.com/profiles/76561198041931474
@@ -15,15 +15,6 @@ CSGSITools [☿](https://github.com/sp0ok3r/Mercury/) is a CSGO Game State Integ
 
 Lazy Bois Club
 
-
-### Soon
-* 
-
-### Download 
-* 
-
-### Issues
-* 
 
 ### Images/Gifs
 
