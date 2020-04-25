@@ -192,7 +192,8 @@
             "Away",
             "Snooze 💤",
             "LookingToTrade",
-            "LookingToPlay"});
+            "LookingToPlay",
+            "Invisible"});
             this.combo_states.Location = new System.Drawing.Point(6, 40);
             this.combo_states.Name = "combo_states";
             this.combo_states.Size = new System.Drawing.Size(319, 29);

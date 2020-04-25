@@ -103,9 +103,8 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Steam4NET, Version=3.2.1.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SP0OK3RBOT-WORK\SteamAdversitingBot\bin\x86\Debug\Steam4NET.dll</HintPath>
+    <Reference Include="Steam4NET">
+      <HintPath>..\..\Steam4NET2018-master\Steam4NET2018\bin\Debug\Steam4NET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">

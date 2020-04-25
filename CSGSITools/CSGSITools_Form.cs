@@ -103,7 +103,7 @@ namespace CSGSITools
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
             LoadCSGOFolder();
             metroTab_csgsiTools.SelectedIndex = 0;
             ps_status.Visible = true;
@@ -148,7 +148,7 @@ namespace CSGSITools
             }
 
         }
-        
+
         private void CheckCSGOProcess()
         {
             Process[] ps = Process.GetProcessesByName("csgo");
@@ -232,7 +232,7 @@ namespace CSGSITools
                 lbl_playerstate.Text = "No server";
 
             }
-            
+
 
             //FLASHED
             if (gs.Player.State.Flashed == 0)
@@ -436,7 +436,7 @@ namespace CSGSITools
             base.WndProc(ref m);
         }
         #endregion
-        
+
         public static void SetStatus(int Number)
         {
             EPersonaState ePersonaState = (EPersonaState)int.Parse(Number.ToString());
@@ -480,6 +480,14 @@ namespace CSGSITools
                 {
                     SetStatus(5);
                 }
+                else if (this.combo_states.SelectedIndex == 6)
+                {
+                    SetStatus(6);
+                }
+                else if (this.combo_states.SelectedIndex == 7)
+                {
+                    SetStatus(7);
+                }
             }
         }
         #endregion
@@ -507,7 +515,7 @@ namespace CSGSITools
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         private static extern IntPtr GetForegroundWindow();
-        
+
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (gsl != null)
@@ -517,7 +525,7 @@ namespace CSGSITools
             Application.ExitThread();
             Environment.Exit(0);
         }
-        
+
         #region LINKS
         private void pictureBox_Github_Click(object sender, EventArgs e)
         {
@@ -559,7 +567,7 @@ namespace CSGSITools
             Process.Start("http://denricdenise.info/metroframework-faq/");
         }
         #endregion
-        
+
         // https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration#Locating_CS:GO_Install_Directory
         // Improved csgo installation detection by bernieplayshd #14
         private static string tryLocatingCSGOFolder()
@@ -601,6 +609,6 @@ namespace CSGSITools
             return null;
         }
 
-        
+
     }
 }
