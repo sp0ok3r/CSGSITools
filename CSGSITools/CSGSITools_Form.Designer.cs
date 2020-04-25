@@ -120,7 +120,7 @@
             // chk_autofocusFrezzeTime
             // 
             this.chk_autofocusFrezzeTime.AutoSize = true;
-            this.chk_autofocusFrezzeTime.Location = new System.Drawing.Point(24, 67);
+            this.chk_autofocusFrezzeTime.Location = new System.Drawing.Point(23, 46);
             this.chk_autofocusFrezzeTime.Name = "chk_autofocusFrezzeTime";
             this.chk_autofocusFrezzeTime.Size = new System.Drawing.Size(241, 15);
             this.chk_autofocusFrezzeTime.Style = MetroFramework.MetroColorStyle.Blue;
@@ -134,7 +134,7 @@
             // chk_autofocus
             // 
             this.chk_autofocus.AutoSize = true;
-            this.chk_autofocus.Location = new System.Drawing.Point(24, 46);
+            this.chk_autofocus.Location = new System.Drawing.Point(23, 25);
             this.chk_autofocus.Name = "chk_autofocus";
             this.chk_autofocus.Size = new System.Drawing.Size(177, 15);
             this.chk_autofocus.Style = MetroFramework.MetroColorStyle.Blue;
@@ -208,9 +208,9 @@
             this.chk_stayState.AutoSize = true;
             this.chk_stayState.Location = new System.Drawing.Point(6, 75);
             this.chk_stayState.Name = "chk_stayState";
-            this.chk_stayState.Size = new System.Drawing.Size(151, 19);
+            this.chk_stayState.Size = new System.Drawing.Size(239, 19);
             this.chk_stayState.TabIndex = 8;
-            this.chk_stayState.Text = "stay in the state defined";
+            this.chk_stayState.Text = "stay in the state defined when round live";
             this.toolTip.SetToolTip(this.chk_stayState, "(soon) When the round starts, csgo window will open for you.");
             this.chk_stayState.UseVisualStyleBackColor = true;
             // 
@@ -285,7 +285,7 @@
             // 
             this.lbl_currentRoundState.AutoSize = true;
             this.lbl_currentRoundState.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_currentRoundState.Location = new System.Drawing.Point(53, 91);
+            this.lbl_currentRoundState.Location = new System.Drawing.Point(53, 97);
             this.lbl_currentRoundState.Name = "lbl_currentRoundState";
             this.lbl_currentRoundState.Size = new System.Drawing.Size(111, 13);
             this.lbl_currentRoundState.TabIndex = 5;
@@ -294,7 +294,7 @@
             // lbl_currentMap
             // 
             this.lbl_currentMap.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_currentMap.Location = new System.Drawing.Point(53, 50);
+            this.lbl_currentMap.Location = new System.Drawing.Point(53, 53);
             this.lbl_currentMap.Name = "lbl_currentMap";
             this.lbl_currentMap.Size = new System.Drawing.Size(179, 34);
             this.lbl_currentMap.TabIndex = 3;
@@ -620,7 +620,7 @@
             this.lbl_setSteamID64.AutoSize = true;
             this.lbl_setSteamID64.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_setSteamID64.ForeColor = System.Drawing.Color.White;
-            this.lbl_setSteamID64.Location = new System.Drawing.Point(364, 63);
+            this.lbl_setSteamID64.Location = new System.Drawing.Point(372, 63);
             this.lbl_setSteamID64.Name = "lbl_setSteamID64";
             this.lbl_setSteamID64.Size = new System.Drawing.Size(85, 13);
             this.lbl_setSteamID64.TabIndex = 46;

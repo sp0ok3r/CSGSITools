@@ -52,7 +52,7 @@ namespace CSGSITools
             steamfriends013 = steamclient.GetISteamFriends<ISteamFriends013>(user, pipe);
             steamfriends002 = steamclient.GetISteamFriends<ISteamFriends002>(user, pipe);
             CSteamID steamID = steamuser.GetSteamID();
-
+            
             CurrentState = steamfriends002.GetFriendPersonaState(steamID);
 
             string ConvertTo64 = steamID.ConvertToUint64().ToString();
@@ -100,6 +100,7 @@ namespace CSGSITools
             InitializeComponent();
             TrolhaTimer.Tick += TrolhaTimer_Tick;
             lbl_version.Text = Program.Version;
+            chk_stayState.Enabled = false;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -351,6 +352,8 @@ namespace CSGSITools
                 {
                     FocusProcess("csgo");
                 }
+
+                chk_stayState.Enabled = true;
             }
             else if (gs.Round.Phase == RoundPhase.FreezeTime)
             {
@@ -382,7 +385,7 @@ namespace CSGSITools
             else if (gs.Round.Phase != RoundPhase.Undefined)
             {
                 lbl_currentMap.Text = gs.Map.Name;
-
+                
 
 
             }
@@ -439,8 +442,7 @@ namespace CSGSITools
 
         public static void SetStatus(int Number)
         {
-            EPersonaState ePersonaState = (EPersonaState)int.Parse(Number.ToString());
-            steamfriends002.SetPersonaState(ePersonaState);
+            steamfriends002.SetPersonaState((EPersonaState)int.Parse(Number.ToString()));
         }
 
         private void TrolhaTimer_Tick(object sender, EventArgs e)
@@ -455,39 +457,7 @@ namespace CSGSITools
         {
             if (chk_stayState.Checked)
             {
-
-                if (this.combo_states.SelectedIndex == 0)
-                {
-                    SetStatus(0);
-                }
-                else if (this.combo_states.SelectedIndex == 1)
-                {
-                    SetStatus(1);
-                }
-                else if (this.combo_states.SelectedIndex == 2)
-                {
-                    SetStatus(2);
-                }
-                else if (this.combo_states.SelectedIndex == 3)
-                {
-                    SetStatus(3);
-                }
-                else if (this.combo_states.SelectedIndex == 4)
-                {
-                    SetStatus(4);
-                }
-                else if (this.combo_states.SelectedIndex == 5)
-                {
-                    SetStatus(5);
-                }
-                else if (this.combo_states.SelectedIndex == 6)
-                {
-                    SetStatus(6);
-                }
-                else if (this.combo_states.SelectedIndex == 7)
-                {
-                    SetStatus(7);
-                }
+                SetStatus(this.combo_states.SelectedIndex);
             }
         }
         #endregion
