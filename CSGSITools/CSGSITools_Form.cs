@@ -52,7 +52,7 @@ namespace CSGSITools
             steamfriends013 = steamclient.GetISteamFriends<ISteamFriends013>(user, pipe);
             steamfriends002 = steamclient.GetISteamFriends<ISteamFriends002>(user, pipe);
             CSteamID steamID = steamuser.GetSteamID();
-            
+
             CurrentState = steamfriends002.GetFriendPersonaState(steamID);
 
             string ConvertTo64 = steamID.ConvertToUint64().ToString();
@@ -104,7 +104,6 @@ namespace CSGSITools
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
             LoadCSGOFolder();
             metroTab_csgsiTools.SelectedIndex = 0;
             ps_status.Visible = true;
@@ -175,6 +174,14 @@ namespace CSGSITools
             string CurrentWeapon = gs.Player.Weapons.ActiveWeapon.Name;
             float RoundEnds = gs.PhaseCountdowns.PhaseEndsIn;
 
+            //lbl_PlayerHP.Text = Health.ToString();
+
+
+            bool Flash = false;
+            bool Smoke = false;
+            bool Molly = false;
+            bool dead = false;
+
 
             if (gs.Player.Activity == PlayerActivity.Undefined)
             {
@@ -191,40 +198,37 @@ namespace CSGSITools
 
                 if (gs.Map.Mode != mode) mode = gs.Map.Mode;
                 if (gs.Map.Name != map) map = gs.Map.Name;
-                if (gs.Player.MatchStats.Kills != stats[0]) stats[0] = gs.Player.MatchStats.Kills;
-                if (gs.Player.MatchStats.Assists != stats[1]) stats[1] = gs.Player.MatchStats.Assists;
-                if (gs.Player.MatchStats.Deaths != stats[2]) stats[2] = gs.Player.MatchStats.Deaths;
+
+                if (gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()))
+                {
+                    if (gs.Player.MatchStats.Kills != stats[0]) stats[0] = gs.Player.MatchStats.Kills;
+                    if (gs.Player.MatchStats.Assists != stats[1]) stats[1] = gs.Player.MatchStats.Assists;
+                    if (gs.Player.MatchStats.Deaths != stats[2]) stats[2] = gs.Player.MatchStats.Deaths;
+
+                    //lbl_playerKills.Text = stats[0].ToString();
+                }
+
                 if (gs.Map.TeamCT.Score != scores[0]) scores[0] = gs.Map.TeamCT.Score;
                 if (gs.Map.TeamT.Score != scores[1]) scores[1] = gs.Map.TeamT.Score;
 
-
+                lbl_CTRounds.Text = scores[0].ToString();
+                lbl_TRounds.Text = scores[1].ToString();
             }
             else if (gs.Player.Activity == PlayerActivity.TextInput)
             {//Console is open
 
             }
-
-
-            bool Flash = false;
-            bool Smoke = false;
-            bool Molly = false;
-            //gs.Player.MatchStats.Kills
-            bool dead = false;
-
+            
             if (gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && Health == 0)
             {
 
                 lbl_playerstate.Text = "Dead";
 
-                dead = true;
-
             }
             else if (gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && Health > 0)
             {
-                lbl_playerstate.ForeColor = Color.DarkGreen;
+                lbl_playerstate.ForeColor = Color.Green;
                 lbl_playerstate.Text = "Alive";
-
-                dead = false;
 
             }
             else
@@ -296,28 +300,19 @@ namespace CSGSITools
                 lbl_bombCurrentState.ForeColor = Color.Red;
                 lbl_bombCurrentState.Text = "Exploded";
 
-
             }
             else if (gs.Round.Bomb == BombState.Defused)
             {
                 lbl_bombCurrentState.ForeColor = Color.DodgerBlue;
                 lbl_bombCurrentState.Text = "Defused";
 
-
             }
-            else if (gs.Round.Phase == RoundPhase.FreezeTime)
-            {
-                IsPlanted = false;
-                lbl_bombCurrentState.ForeColor = Color.Blue;
-                lbl_bombCurrentState.Text = "Bomb not planted";
-
-
-            }
-            else if (gs.Round.Phase == RoundPhase.Live)
+            else if (gs.Round.Phase == RoundPhase.FreezeTime || gs.Round.Phase == RoundPhase.Live)
             {
                 IsPlanted = false;
                 lbl_bombCurrentState.ForeColor = Color.DarkRed;
-                lbl_bombCurrentState.Text = "Bomb not planted yet";
+                lbl_bombCurrentState.Text = "Bomb not planted";
+
             }
             else
             {
@@ -333,9 +328,9 @@ namespace CSGSITools
         private void RoundState(GameState gs)
         {
             lbl_currentMap.Text = gs.Map.Name;
+
             if (gs.Round.Phase == RoundPhase.Over)
             {
-
                 lbl_currentRoundState.Text = gs.Round.WinTeam + " - WINS";
                 lbl_currentRoundState.ForeColor = Color.Red;
 
@@ -365,8 +360,6 @@ namespace CSGSITools
                 {
                     FocusProcess("csgo");
                 }
-
-                //
             }
 
             else if (gs.Round.Phase == RoundPhase.FreezeTime || gs.Round.Phase == RoundPhase.Undefined && gs.Map.Round == 0)
@@ -381,18 +374,16 @@ namespace CSGSITools
                 lbl_currentMap.ForeColor = Color.Red;
                 lbl_currentMap.Text = "No server";
 
+
+                lbl_CTRounds.ForeColor = Color.Red;
+                lbl_CTRounds.Text = "0";
+                lbl_TRounds.ForeColor = Color.Red;
+                lbl_TRounds.Text = "0";
+
             }
             else if (gs.Round.Phase != RoundPhase.Undefined)
             {
                 lbl_currentMap.Text = gs.Map.Name;
-                
-
-
-            }
-            else
-            {
-
-
             }
         }
         #endregion
