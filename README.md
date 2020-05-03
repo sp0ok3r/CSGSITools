@@ -19,4 +19,4 @@ Lazy Bois Club
 
 ### Images/Gifs
 
-<img align="left" width="606" height="328" src="https://raw.githubusercontent.com/sp0ok3r/CSGSITools/master/images/csgsiTool1.png">
+<img align="left" width="606" height="328" src="https://raw.githubusercontent.com/sp0ok3r/CSGSITools/master/images/csgsiTool.png">
