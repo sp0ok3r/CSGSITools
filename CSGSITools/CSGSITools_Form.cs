@@ -479,6 +479,9 @@ namespace CSGSITools
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            
+            SetStatus(1);
+            Steamworks.Load(false);
             if (gsl != null)
             {
                 gsl.Stop();
