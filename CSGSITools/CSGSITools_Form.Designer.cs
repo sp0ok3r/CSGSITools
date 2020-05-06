@@ -33,14 +33,15 @@
             this.lbl_playerstate = new System.Windows.Forms.Label();
             this.lbl_bombCurrentState = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.chk_autofocusFrezzeTime = new MetroFramework.Controls.MetroCheckBox();
-            this.chk_autofocus = new MetroFramework.Controls.MetroCheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbl_currentSteamState = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.combo_states = new MetroFramework.Controls.MetroComboBox();
-            this.chk_stayState = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
+            this.lbl_TRounds = new System.Windows.Forms.Label();
+            this.lbl_CTRounds = new System.Windows.Forms.Label();
+            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.lbl_playerStateLabel = new MetroFramework.Controls.MetroLabel();
             this.lbl_bombState = new MetroFramework.Controls.MetroLabel();
             this.lbl_roundState = new MetroFramework.Controls.MetroLabel();
@@ -71,15 +72,19 @@
             this.txtBox_steamID = new MetroFramework.Controls.MetroTextBox();
             this.lbl_setSteamID64 = new System.Windows.Forms.Label();
             this.metroPanel10 = new MetroFramework.Controls.MetroPanel();
-            this.lbl_version = new MetroFramework.Controls.MetroLabel();
             this.ps_status = new MetroFramework.Controls.MetroProgressSpinner();
+            this.lbl_version = new MetroFramework.Controls.MetroLabel();
             this.lbl_infoversion = new MetroFramework.Controls.MetroLabel();
             this.TrolhaTimer = new System.Windows.Forms.Timer(this.components);
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
-            this.lbl_CTRounds = new System.Windows.Forms.Label();
-            this.lbl_TRounds = new System.Windows.Forms.Label();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
+            this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
+            this.cb_focus = new MetroFramework.Controls.MetroComboBox();
+            this.lbl_focus = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
+            this.metroComboBox2 = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -94,7 +99,7 @@
             // 
             this.lbl_playerstate.AutoSize = true;
             this.lbl_playerstate.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_playerstate.Location = new System.Drawing.Point(58, 115);
+            this.lbl_playerstate.Location = new System.Drawing.Point(62, 144);
             this.lbl_playerstate.Name = "lbl_playerstate";
             this.lbl_playerstate.Size = new System.Drawing.Size(106, 13);
             this.lbl_playerstate.TabIndex = 1;
@@ -104,7 +109,7 @@
             // 
             this.lbl_bombCurrentState.AutoSize = true;
             this.lbl_bombCurrentState.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_bombCurrentState.Location = new System.Drawing.Point(58, 178);
+            this.lbl_bombCurrentState.Location = new System.Drawing.Point(62, 221);
             this.lbl_bombCurrentState.Name = "lbl_bombCurrentState";
             this.lbl_bombCurrentState.Size = new System.Drawing.Size(105, 13);
             this.lbl_bombCurrentState.TabIndex = 1;
@@ -112,55 +117,29 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.chk_autofocusFrezzeTime);
-            this.groupBox4.Controls.Add(this.chk_autofocus);
+            this.groupBox4.Controls.Add(this.metroLabel10);
+            this.groupBox4.Controls.Add(this.lbl_focus);
+            this.groupBox4.Controls.Add(this.cb_focus);
+            this.groupBox4.Controls.Add(this.metroComboBox1);
             this.groupBox4.ForeColor = System.Drawing.Color.White;
-            this.groupBox4.Location = new System.Drawing.Point(245, 147);
+            this.groupBox4.Location = new System.Drawing.Point(254, 140);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(331, 75);
+            this.groupBox4.Size = new System.Drawing.Size(352, 120);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Extras";
             // 
-            // chk_autofocusFrezzeTime
-            // 
-            this.chk_autofocusFrezzeTime.AutoSize = true;
-            this.chk_autofocusFrezzeTime.Location = new System.Drawing.Point(45, 44);
-            this.chk_autofocusFrezzeTime.Name = "chk_autofocusFrezzeTime";
-            this.chk_autofocusFrezzeTime.Size = new System.Drawing.Size(241, 15);
-            this.chk_autofocusFrezzeTime.Style = MetroFramework.MetroColorStyle.Blue;
-            this.chk_autofocusFrezzeTime.TabIndex = 11;
-            this.chk_autofocusFrezzeTime.Text = "Open CSGO when round is in freeze time!";
-            this.chk_autofocusFrezzeTime.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.toolTip.SetToolTip(this.chk_autofocusFrezzeTime, "When the round starts, csgo window will open for you.");
-            this.chk_autofocusFrezzeTime.UseSelectable = true;
-            this.chk_autofocusFrezzeTime.UseStyleColors = true;
-            // 
-            // chk_autofocus
-            // 
-            this.chk_autofocus.AutoSize = true;
-            this.chk_autofocus.Location = new System.Drawing.Point(45, 23);
-            this.chk_autofocus.Name = "chk_autofocus";
-            this.chk_autofocus.Size = new System.Drawing.Size(177, 15);
-            this.chk_autofocus.Style = MetroFramework.MetroColorStyle.Blue;
-            this.chk_autofocus.TabIndex = 10;
-            this.chk_autofocus.Text = "Open CSGO when round live!";
-            this.chk_autofocus.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.toolTip.SetToolTip(this.chk_autofocus, "When the round starts, csgo window will open for you.");
-            this.chk_autofocus.UseSelectable = true;
-            this.chk_autofocus.UseStyleColors = true;
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lbl_currentSteamState);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.metroLabel13);
+            this.groupBox1.Controls.Add(this.metroComboBox2);
+            this.groupBox1.Controls.Add(this.metroLabel12);
             this.groupBox1.Controls.Add(this.combo_states);
-            this.groupBox1.Controls.Add(this.chk_stayState);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(245, 19);
+            this.groupBox1.Location = new System.Drawing.Point(254, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(331, 106);
+            this.groupBox1.Size = new System.Drawing.Size(352, 106);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Steam State Chooser";
@@ -169,22 +148,12 @@
             // 
             this.lbl_currentSteamState.AutoSize = true;
             this.lbl_currentSteamState.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_currentSteamState.ForeColor = System.Drawing.Color.Green;
-            this.lbl_currentSteamState.Location = new System.Drawing.Point(87, 23);
+            this.lbl_currentSteamState.ForeColor = System.Drawing.Color.White;
+            this.lbl_currentSteamState.Location = new System.Drawing.Point(493, 46);
             this.lbl_currentSteamState.Name = "lbl_currentSteamState";
             this.lbl_currentSteamState.Size = new System.Drawing.Size(16, 13);
             this.lbl_currentSteamState.TabIndex = 7;
             this.lbl_currentSteamState.Text = "...";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Current State:";
             // 
             // combo_states
             // 
@@ -195,32 +164,23 @@
             "Online",
             "Busy",
             "Away",
-            "Snooze 💤",
-            "LookingToTrade",
-            "LookingToPlay",
-            "Invisible"});
-            this.combo_states.Location = new System.Drawing.Point(6, 40);
+            "Snooze",
+            "Looking To Trade",
+            "Looking To Play",
+            "Invisible",
+            "Disabled"});
+            this.combo_states.Location = new System.Drawing.Point(133, 30);
             this.combo_states.Name = "combo_states";
-            this.combo_states.Size = new System.Drawing.Size(319, 29);
+            this.combo_states.Size = new System.Drawing.Size(160, 29);
             this.combo_states.TabIndex = 17;
             this.combo_states.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.combo_states.UseSelectable = true;
             this.combo_states.UseStyleColors = true;
             this.combo_states.SelectedIndexChanged += new System.EventHandler(this.combo_states_SelectedIndexChanged);
             // 
-            // chk_stayState
-            // 
-            this.chk_stayState.AutoSize = true;
-            this.chk_stayState.Location = new System.Drawing.Point(6, 81);
-            this.chk_stayState.Name = "chk_stayState";
-            this.chk_stayState.Size = new System.Drawing.Size(240, 19);
-            this.chk_stayState.TabIndex = 8;
-            this.chk_stayState.Text = "Stay in the state defined when round live";
-            this.toolTip.SetToolTip(this.chk_stayState, "(dev) When the round starts, csgo window will open for you.");
-            this.chk_stayState.UseVisualStyleBackColor = true;
-            // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.metroLabel14);
             this.groupBox3.Controls.Add(this.richTextBox4);
             this.groupBox3.Controls.Add(this.lbl_TRounds);
             this.groupBox3.Controls.Add(this.lbl_CTRounds);
@@ -236,17 +196,80 @@
             this.groupBox3.Controls.Add(this.lbl_currentMap);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(0, 19);
+            this.groupBox3.Location = new System.Drawing.Point(0, 7);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(239, 203);
+            this.groupBox3.Size = new System.Drawing.Size(239, 253);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Game State";
             // 
+            // richTextBox4
+            // 
+            this.richTextBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.richTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox4.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.richTextBox4.DetectUrls = false;
+            this.richTextBox4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox4.ForeColor = System.Drawing.Color.Gray;
+            this.richTextBox4.Location = new System.Drawing.Point(36, 110);
+            this.richTextBox4.MaxLength = 50;
+            this.richTextBox4.Multiline = false;
+            this.richTextBox4.Name = "richTextBox4";
+            this.richTextBox4.ReadOnly = true;
+            this.richTextBox4.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.richTextBox4.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.richTextBox4.Size = new System.Drawing.Size(154, 14);
+            this.richTextBox4.TabIndex = 70;
+            this.richTextBox4.Text = "─────────────────────────────────────────";
+            // 
+            // lbl_TRounds
+            // 
+            this.lbl_TRounds.AutoSize = true;
+            this.lbl_TRounds.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_TRounds.Location = new System.Drawing.Point(134, 93);
+            this.lbl_TRounds.Name = "lbl_TRounds";
+            this.lbl_TRounds.Size = new System.Drawing.Size(59, 13);
+            this.lbl_TRounds.TabIndex = 54;
+            this.lbl_TRounds.Text = "(TRounds)";
+            // 
+            // lbl_CTRounds
+            // 
+            this.lbl_CTRounds.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_CTRounds.Location = new System.Drawing.Point(38, 93);
+            this.lbl_CTRounds.Name = "lbl_CTRounds";
+            this.lbl_CTRounds.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lbl_CTRounds.Size = new System.Drawing.Size(66, 13);
+            this.lbl_CTRounds.TabIndex = 53;
+            this.lbl_CTRounds.Text = "(CTRounds)";
+            // 
+            // metroLabel8
+            // 
+            this.metroLabel8.AutoSize = true;
+            this.metroLabel8.Location = new System.Drawing.Point(133, 71);
+            this.metroLabel8.Name = "metroLabel8";
+            this.metroLabel8.Size = new System.Drawing.Size(16, 19);
+            this.metroLabel8.TabIndex = 52;
+            this.metroLabel8.Text = "T";
+            this.metroLabel8.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel8.UseCustomBackColor = true;
+            this.metroLabel8.UseStyleColors = true;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(80, 71);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(25, 19);
+            this.metroLabel2.TabIndex = 51;
+            this.metroLabel2.Text = "CT";
+            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel2.UseCustomBackColor = true;
+            this.metroLabel2.UseStyleColors = true;
+            // 
             // lbl_playerStateLabel
             // 
             this.lbl_playerStateLabel.AutoSize = true;
-            this.lbl_playerStateLabel.Location = new System.Drawing.Point(6, 109);
+            this.lbl_playerStateLabel.Location = new System.Drawing.Point(10, 140);
             this.lbl_playerStateLabel.Name = "lbl_playerStateLabel";
             this.lbl_playerStateLabel.Size = new System.Drawing.Size(49, 19);
             this.lbl_playerStateLabel.TabIndex = 50;
@@ -258,7 +281,7 @@
             // lbl_bombState
             // 
             this.lbl_bombState.AutoSize = true;
-            this.lbl_bombState.Location = new System.Drawing.Point(7, 172);
+            this.lbl_bombState.Location = new System.Drawing.Point(11, 217);
             this.lbl_bombState.Name = "lbl_bombState";
             this.lbl_bombState.Size = new System.Drawing.Size(48, 19);
             this.lbl_bombState.TabIndex = 49;
@@ -270,7 +293,7 @@
             // lbl_roundState
             // 
             this.lbl_roundState.AutoSize = true;
-            this.lbl_roundState.Location = new System.Drawing.Point(5, 145);
+            this.lbl_roundState.Location = new System.Drawing.Point(9, 182);
             this.lbl_roundState.Name = "lbl_roundState";
             this.lbl_roundState.Size = new System.Drawing.Size(50, 19);
             this.lbl_roundState.TabIndex = 48;
@@ -282,7 +305,7 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(10, 24);
+            this.metroLabel1.Location = new System.Drawing.Point(20, 26);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(39, 19);
             this.metroLabel1.TabIndex = 47;
@@ -295,7 +318,7 @@
             // 
             this.lbl_currentRoundState.AutoSize = true;
             this.lbl_currentRoundState.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_currentRoundState.Location = new System.Drawing.Point(58, 151);
+            this.lbl_currentRoundState.Location = new System.Drawing.Point(62, 186);
             this.lbl_currentRoundState.Name = "lbl_currentRoundState";
             this.lbl_currentRoundState.Size = new System.Drawing.Size(111, 13);
             this.lbl_currentRoundState.TabIndex = 5;
@@ -304,9 +327,9 @@
             // lbl_currentMap
             // 
             this.lbl_currentMap.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_currentMap.Location = new System.Drawing.Point(53, 26);
+            this.lbl_currentMap.Location = new System.Drawing.Point(58, 30);
             this.lbl_currentMap.Name = "lbl_currentMap";
-            this.lbl_currentMap.Size = new System.Drawing.Size(179, 34);
+            this.lbl_currentMap.Size = new System.Drawing.Size(170, 34);
             this.lbl_currentMap.TabIndex = 3;
             this.lbl_currentMap.Text = "(currentStateMap)";
             // 
@@ -321,11 +344,11 @@
             this.metroTab_csgsiTools.Controls.Add(this.CSGOStateTabPage);
             this.metroTab_csgsiTools.Controls.Add(this.info_tab);
             this.metroTab_csgsiTools.Cursor = System.Windows.Forms.Cursors.Default;
-            this.metroTab_csgsiTools.Location = new System.Drawing.Point(13, 46);
+            this.metroTab_csgsiTools.Location = new System.Drawing.Point(12, 56);
             this.metroTab_csgsiTools.Name = "metroTab_csgsiTools";
             this.metroTab_csgsiTools.SelectedIndex = 0;
             this.metroTab_csgsiTools.ShowToolTips = true;
-            this.metroTab_csgsiTools.Size = new System.Drawing.Size(584, 264);
+            this.metroTab_csgsiTools.Size = new System.Drawing.Size(621, 302);
             this.metroTab_csgsiTools.TabIndex = 1;
             this.metroTab_csgsiTools.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroTab_csgsiTools.UseSelectable = true;
@@ -342,7 +365,7 @@
             this.CSGOStateTabPage.HorizontalScrollbarSize = 10;
             this.CSGOStateTabPage.Location = new System.Drawing.Point(4, 38);
             this.CSGOStateTabPage.Name = "CSGOStateTabPage";
-            this.CSGOStateTabPage.Size = new System.Drawing.Size(576, 222);
+            this.CSGOStateTabPage.Size = new System.Drawing.Size(613, 260);
             this.CSGOStateTabPage.TabIndex = 1;
             this.CSGOStateTabPage.Text = "🎮 GSI";
             this.CSGOStateTabPage.UseCustomBackColor = true;
@@ -376,7 +399,7 @@
             this.info_tab.HorizontalScrollbarSize = 10;
             this.info_tab.Location = new System.Drawing.Point(4, 38);
             this.info_tab.Name = "info_tab";
-            this.info_tab.Size = new System.Drawing.Size(576, 222);
+            this.info_tab.Size = new System.Drawing.Size(613, 260);
             this.info_tab.TabIndex = 2;
             this.info_tab.Text = "🛈 INFORMATION";
             this.info_tab.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -606,7 +629,7 @@
             this.txtBox_steamID.CustomButton.UseSelectable = true;
             this.txtBox_steamID.CustomButton.Visible = false;
             this.txtBox_steamID.Lines = new string[0];
-            this.txtBox_steamID.Location = new System.Drawing.Point(455, 56);
+            this.txtBox_steamID.Location = new System.Drawing.Point(491, 64);
             this.txtBox_steamID.MaxLength = 32767;
             this.txtBox_steamID.Multiline = true;
             this.txtBox_steamID.Name = "txtBox_steamID";
@@ -618,10 +641,13 @@
             this.txtBox_steamID.SelectionStart = 0;
             this.txtBox_steamID.ShortcutsEnabled = true;
             this.txtBox_steamID.Size = new System.Drawing.Size(138, 22);
+            this.txtBox_steamID.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtBox_steamID.TabIndex = 24;
             this.txtBox_steamID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtBox_steamID.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.txtBox_steamID.UseCustomBackColor = true;
             this.txtBox_steamID.UseSelectable = true;
+            this.txtBox_steamID.UseStyleColors = true;
             this.txtBox_steamID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtBox_steamID.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
@@ -630,7 +656,7 @@
             this.lbl_setSteamID64.AutoSize = true;
             this.lbl_setSteamID64.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_setSteamID64.ForeColor = System.Drawing.Color.White;
-            this.lbl_setSteamID64.Location = new System.Drawing.Point(372, 63);
+            this.lbl_setSteamID64.Location = new System.Drawing.Point(408, 71);
             this.lbl_setSteamID64.Name = "lbl_setSteamID64";
             this.lbl_setSteamID64.Size = new System.Drawing.Size(85, 13);
             this.lbl_setSteamID64.TabIndex = 46;
@@ -645,9 +671,9 @@
             this.metroPanel10.HorizontalScrollbarBarColor = true;
             this.metroPanel10.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel10.HorizontalScrollbarSize = 10;
-            this.metroPanel10.Location = new System.Drawing.Point(-6, 321);
+            this.metroPanel10.Location = new System.Drawing.Point(-6, 364);
             this.metroPanel10.Name = "metroPanel10";
-            this.metroPanel10.Size = new System.Drawing.Size(615, 22);
+            this.metroPanel10.Size = new System.Drawing.Size(654, 26);
             this.metroPanel10.TabIndex = 23;
             this.metroPanel10.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroPanel10.UseCustomBackColor = true;
@@ -656,10 +682,22 @@
             this.metroPanel10.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel10.VerticalScrollbarSize = 10;
             // 
+            // ps_status
+            // 
+            this.ps_status.Location = new System.Drawing.Point(625, 0);
+            this.ps_status.Maximum = 100;
+            this.ps_status.Name = "ps_status";
+            this.ps_status.Size = new System.Drawing.Size(25, 25);
+            this.ps_status.TabIndex = 17;
+            this.ps_status.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.ps_status.UseCustomBackColor = true;
+            this.ps_status.UseCustomForeColor = true;
+            this.ps_status.UseSelectable = true;
+            // 
             // lbl_version
             // 
             this.lbl_version.AutoSize = true;
-            this.lbl_version.Location = new System.Drawing.Point(3, 1);
+            this.lbl_version.Location = new System.Drawing.Point(4, 3);
             this.lbl_version.Name = "lbl_version";
             this.lbl_version.Size = new System.Drawing.Size(59, 19);
             this.lbl_version.TabIndex = 82;
@@ -667,18 +705,6 @@
             this.lbl_version.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.lbl_version.UseCustomBackColor = true;
             this.lbl_version.UseStyleColors = true;
-            // 
-            // ps_status
-            // 
-            this.ps_status.Location = new System.Drawing.Point(596, 3);
-            this.ps_status.Maximum = 100;
-            this.ps_status.Name = "ps_status";
-            this.ps_status.Size = new System.Drawing.Size(16, 16);
-            this.ps_status.TabIndex = 17;
-            this.ps_status.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.ps_status.UseCustomBackColor = true;
-            this.ps_status.UseCustomForeColor = true;
-            this.ps_status.UseSelectable = true;
             // 
             // lbl_infoversion
             // 
@@ -701,77 +727,133 @@
             this.TrolhaTimer.Interval = 3000;
             this.TrolhaTimer.Tick += new System.EventHandler(this.TrolhaTimer_Tick);
             // 
-            // metroLabel2
+            // metroComboBox1
             // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(82, 59);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(25, 19);
-            this.metroLabel2.TabIndex = 51;
-            this.metroLabel2.Text = "CT";
-            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroLabel2.UseCustomBackColor = true;
-            this.metroLabel2.UseStyleColors = true;
+            this.metroComboBox1.FormattingEnabled = true;
+            this.metroComboBox1.ItemHeight = 23;
+            this.metroComboBox1.Location = new System.Drawing.Point(133, 50);
+            this.metroComboBox1.Name = "metroComboBox1";
+            this.metroComboBox1.Size = new System.Drawing.Size(160, 29);
+            this.metroComboBox1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroComboBox1.TabIndex = 12;
+            this.metroComboBox1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroComboBox1.UseSelectable = true;
+            this.metroComboBox1.UseStyleColors = true;
             // 
-            // metroLabel8
+            // cb_focus
             // 
-            this.metroLabel8.AutoSize = true;
-            this.metroLabel8.Location = new System.Drawing.Point(135, 59);
-            this.metroLabel8.Name = "metroLabel8";
-            this.metroLabel8.Size = new System.Drawing.Size(16, 19);
-            this.metroLabel8.TabIndex = 52;
-            this.metroLabel8.Text = "T";
-            this.metroLabel8.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroLabel8.UseCustomBackColor = true;
-            this.metroLabel8.UseStyleColors = true;
+            this.cb_focus.FormattingEnabled = true;
+            this.cb_focus.ItemHeight = 23;
+            this.cb_focus.Items.AddRange(new object[] {
+            "Disabled",
+            "Round Live",
+            "Round in FreezeTime"});
+            this.cb_focus.Location = new System.Drawing.Point(133, 15);
+            this.cb_focus.Name = "cb_focus";
+            this.cb_focus.Size = new System.Drawing.Size(160, 29);
+            this.cb_focus.Style = MetroFramework.MetroColorStyle.Blue;
+            this.cb_focus.TabIndex = 14;
+            this.cb_focus.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cb_focus.UseSelectable = true;
+            this.cb_focus.UseStyleColors = true;
             // 
-            // lbl_CTRounds
+            // lbl_focus
             // 
-            this.lbl_CTRounds.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_CTRounds.Location = new System.Drawing.Point(40, 81);
-            this.lbl_CTRounds.Name = "lbl_CTRounds";
-            this.lbl_CTRounds.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lbl_CTRounds.Size = new System.Drawing.Size(66, 13);
-            this.lbl_CTRounds.TabIndex = 53;
-            this.lbl_CTRounds.Text = "(CTRounds)";
+            this.lbl_focus.AutoSize = true;
+            this.lbl_focus.Location = new System.Drawing.Point(11, 20);
+            this.lbl_focus.Name = "lbl_focus";
+            this.lbl_focus.Size = new System.Drawing.Size(116, 19);
+            this.lbl_focus.TabIndex = 71;
+            this.lbl_focus.Text = "Open CSGO when";
+            this.lbl_focus.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.lbl_focus.UseCustomBackColor = true;
+            this.lbl_focus.UseStyleColors = true;
             // 
-            // lbl_TRounds
+            // metroLabel10
             // 
-            this.lbl_TRounds.AutoSize = true;
-            this.lbl_TRounds.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_TRounds.Location = new System.Drawing.Point(136, 81);
-            this.lbl_TRounds.Name = "lbl_TRounds";
-            this.lbl_TRounds.Size = new System.Drawing.Size(59, 13);
-            this.lbl_TRounds.TabIndex = 54;
-            this.lbl_TRounds.Text = "(TRounds)";
+            this.metroLabel10.AutoSize = true;
+            this.metroLabel10.Location = new System.Drawing.Point(40, 55);
+            this.metroLabel10.Name = "metroLabel10";
+            this.metroLabel10.Size = new System.Drawing.Size(87, 19);
+            this.metroLabel10.TabIndex = 72;
+            this.metroLabel10.Text = "If match ends";
+            this.metroLabel10.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel10.UseCustomBackColor = true;
+            this.metroLabel10.UseStyleColors = true;
             // 
-            // richTextBox4
+            // metroLabel11
             // 
-            this.richTextBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.richTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox4.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.richTextBox4.DetectUrls = false;
-            this.richTextBox4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox4.ForeColor = System.Drawing.Color.Gray;
-            this.richTextBox4.Location = new System.Drawing.Point(38, 98);
-            this.richTextBox4.MaxLength = 50;
-            this.richTextBox4.Multiline = false;
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.ReadOnly = true;
-            this.richTextBox4.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox4.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.richTextBox4.Size = new System.Drawing.Size(154, 14);
-            this.richTextBox4.TabIndex = 70;
-            this.richTextBox4.Text = "─────────────────────────────────────────";
+            this.metroLabel11.AutoSize = true;
+            this.metroLabel11.Location = new System.Drawing.Point(404, 42);
+            this.metroLabel11.Name = "metroLabel11";
+            this.metroLabel11.Size = new System.Drawing.Size(89, 19);
+            this.metroLabel11.TabIndex = 70;
+            this.metroLabel11.Text = "Current State:";
+            this.metroLabel11.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel11.UseCustomBackColor = true;
+            this.metroLabel11.UseStyleColors = true;
+            // 
+            // metroLabel12
+            // 
+            this.metroLabel12.AutoSize = true;
+            this.metroLabel12.Location = new System.Drawing.Point(35, 69);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(66, 19);
+            this.metroLabel12.TabIndex = 73;
+            this.metroLabel12.Text = "Stay Until:";
+            this.metroLabel12.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel12.UseCustomBackColor = true;
+            this.metroLabel12.UseStyleColors = true;
+            // 
+            // metroComboBox2
+            // 
+            this.metroComboBox2.FormattingEnabled = true;
+            this.metroComboBox2.ItemHeight = 23;
+            this.metroComboBox2.Items.AddRange(new object[] {
+            "Close The App",
+            "End of the match"});
+            this.metroComboBox2.Location = new System.Drawing.Point(133, 65);
+            this.metroComboBox2.Name = "metroComboBox2";
+            this.metroComboBox2.Size = new System.Drawing.Size(160, 29);
+            this.metroComboBox2.TabIndex = 74;
+            this.metroComboBox2.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroComboBox2.UseSelectable = true;
+            this.metroComboBox2.UseStyleColors = true;
+            // 
+            // metroLabel13
+            // 
+            this.metroLabel13.AutoSize = true;
+            this.metroLabel13.Location = new System.Drawing.Point(11, 33);
+            this.metroLabel13.Name = "metroLabel13";
+            this.metroLabel13.Size = new System.Drawing.Size(90, 19);
+            this.metroLabel13.TabIndex = 75;
+            this.metroLabel13.Text = "Change State:";
+            this.metroLabel13.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel13.UseCustomBackColor = true;
+            this.metroLabel13.UseStyleColors = true;
+            // 
+            // metroLabel14
+            // 
+            this.metroLabel14.AutoSize = true;
+            this.metroLabel14.Location = new System.Drawing.Point(111, 71);
+            this.metroLabel14.Name = "metroLabel14";
+            this.metroLabel14.Size = new System.Drawing.Size(12, 19);
+            this.metroLabel14.TabIndex = 83;
+            this.metroLabel14.Text = "|";
+            this.metroLabel14.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel14.UseCustomBackColor = true;
+            this.metroLabel14.UseStyleColors = true;
             // 
             // CSGSITools_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 343);
+            this.ClientSize = new System.Drawing.Size(645, 390);
+            this.Controls.Add(this.metroLabel11);
             this.Controls.Add(this.txtBox_steamID);
             this.Controls.Add(this.lbl_setSteamID64);
             this.Controls.Add(this.metroPanel10);
+            this.Controls.Add(this.lbl_currentSteamState);
             this.Controls.Add(this.metroTab_csgsiTools);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -839,13 +921,9 @@
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLink metroLink_valveGSI;
         private MetroFramework.Controls.MetroLink metroLink1;
-        private MetroFramework.Controls.MetroCheckBox chk_autofocus;
-        private MetroFramework.Controls.MetroCheckBox chk_autofocusFrezzeTime;
-        private System.Windows.Forms.CheckBox chk_stayState;
         private MetroFramework.Controls.MetroLabel lbl_version;
         private System.Windows.Forms.Timer TrolhaTimer;
         private System.Windows.Forms.Label lbl_currentSteamState;
-        private System.Windows.Forms.Label label1;
         private MetroFramework.Controls.MetroLabel lbl_playerStateLabel;
         private MetroFramework.Controls.MetroLabel lbl_bombState;
         private MetroFramework.Controls.MetroLabel lbl_roundState;
@@ -855,6 +933,15 @@
         private System.Windows.Forms.Label lbl_TRounds;
         private System.Windows.Forms.Label lbl_CTRounds;
         private System.Windows.Forms.RichTextBox richTextBox4;
+        private MetroFramework.Controls.MetroComboBox metroComboBox1;
+        private MetroFramework.Controls.MetroComboBox cb_focus;
+        private MetroFramework.Controls.MetroLabel lbl_focus;
+        private MetroFramework.Controls.MetroLabel metroLabel10;
+        private MetroFramework.Controls.MetroLabel metroLabel11;
+        private MetroFramework.Controls.MetroComboBox metroComboBox2;
+        private MetroFramework.Controls.MetroLabel metroLabel12;
+        private MetroFramework.Controls.MetroLabel metroLabel13;
+        private MetroFramework.Controls.MetroLabel metroLabel14;
     }
 }
 

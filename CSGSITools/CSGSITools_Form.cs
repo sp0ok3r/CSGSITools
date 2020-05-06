@@ -75,6 +75,8 @@ namespace CSGSITools
         }
         #endregion
 
+        DisplayConfiguration.PHYSICAL_MONITOR[] physicalMonitors;
+
         GameStateListener gsl;
 
         public static bool IsPlanted;
@@ -92,15 +94,20 @@ namespace CSGSITools
         private static readonly int[] scores = new int[2] { 0, 0 }; //CT-T
         private static string map = "Undefined";
         private static readonly int[] stats = new int[3] { 0, 0, 0 }; //Kills, Assists, Deaths
+        private static readonly int[] Grenades = new int[3] { 0, 0, 0 }; //Flash, Smoke, Molly
 
         private static string csgoCFGPath;
 
         public CSGSITools_Form()
         {
             InitializeComponent();
+            cb_focus.SelectedIndex = 0;
+            combo_states.SelectedIndex = 8;
+
             TrolhaTimer.Tick += TrolhaTimer_Tick;
             lbl_version.Text = Program.Version;
-            chk_stayState.Enabled = false;
+
+            physicalMonitors = DisplayConfiguration.GetPhysicalMonitors(DisplayConfiguration.GetCurrentMonitor());
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -169,115 +176,91 @@ namespace CSGSITools
         #region PlayerState
         private void PlayerState(GameState gs)
         {
-            int Health = gs.Player.State.Health;
-            int WeaponAmmoClip = gs.Player.Weapons.ActiveWeapon.AmmoClip;
-            string CurrentWeapon = gs.Player.Weapons.ActiveWeapon.Name;
-            float RoundEnds = gs.PhaseCountdowns.PhaseEndsIn;
 
-            //lbl_PlayerHP.Text = Health.ToString();
-
-
-            bool Flash = false;
-            bool Smoke = false;
-            bool Molly = false;
-            bool dead = false;
-
-
-            if (gs.Player.Activity == PlayerActivity.Undefined)
+            if (gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()))
             {
 
+                int Health = gs.Player.State.Health;
+                int WeaponAmmoClip = gs.Player.Weapons.ActiveWeapon.AmmoClip;
+                string CurrentWeapon = gs.Player.Weapons.ActiveWeapon.Name;
 
-            }
-            else if (gs.Player.Activity == PlayerActivity.Menu)
-            {//Is in a menu (also applies to opening the in game menu with ESC).
-
-
-            }
-            else if (gs.Player.Activity == PlayerActivity.Playing)
-            {//Playing or spectating.
-
-                if (gs.Map.Mode != mode) mode = gs.Map.Mode;
-                if (gs.Map.Name != map) map = gs.Map.Name;
-
-                if (gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()))
+                if (gs.Player.Activity == PlayerActivity.Undefined)
                 {
+                    lbl_playerstate.ForeColor = Color.Gold;
+                    lbl_playerstate.Text = "Undefined";
+
+                }
+                else if (gs.Player.Activity == PlayerActivity.Menu)
+                {//Is in a menu (also ESC).
+
+                    lbl_playerstate.ForeColor = Color.Gold;
+                    lbl_playerstate.Text = "In Menu";
+                }
+                else if (gs.Player.Activity == PlayerActivity.Playing)
+                {//Playing or spectating.
+                    if (gs.Map.Mode != mode) mode = gs.Map.Mode;
+                    if (gs.Map.Name != map) map = gs.Map.Name.Split('/').Last();
+
+                    //KD Stats
                     if (gs.Player.MatchStats.Kills != stats[0]) stats[0] = gs.Player.MatchStats.Kills;
                     if (gs.Player.MatchStats.Assists != stats[1]) stats[1] = gs.Player.MatchStats.Assists;
                     if (gs.Player.MatchStats.Deaths != stats[2]) stats[2] = gs.Player.MatchStats.Deaths;
 
                     //lbl_playerKills.Text = stats[0].ToString();
+                    // Grenades
+                    if (gs.Player.State.Flashed != Grenades[0]) Grenades[0] = gs.Player.State.Flashed;
+                    if (gs.Player.State.Smoked != Grenades[1]) Grenades[1] = gs.Player.State.Smoked;
+                    if (gs.Player.State.Burning != Grenades[2]) Grenades[2] = gs.Player.State.Burning;
+
+                    if (gs.Map.TeamCT.Score != scores[0]) scores[0] = gs.Map.TeamCT.Score;
+                    if (gs.Map.TeamT.Score != scores[1]) scores[1] = gs.Map.TeamT.Score;
+
+                    lbl_CTRounds.Text = scores[0].ToString();
+                    lbl_TRounds.Text = scores[1].ToString();
+
+                    Console.WriteLine("ali " + gs.Player.Activity);
+
+                    if (Health == 0)
+                    {
+                        lbl_playerstate.ForeColor = Color.DarkRed;
+                        lbl_playerstate.Text = "Dead";
+                    }
+                    else
+                    {
+                        lbl_playerstate.ForeColor = Color.Green;
+                        lbl_playerstate.Text = "Alive";
+                    }
+                }
+                else if (gs.Player.Activity == PlayerActivity.TextInput)
+                {//Console is open
+
                 }
 
-                if (gs.Map.TeamCT.Score != scores[0]) scores[0] = gs.Map.TeamCT.Score;
-                if (gs.Map.TeamT.Score != scores[1]) scores[1] = gs.Map.TeamT.Score;
+                //misc
+                //FLASHED
+                if (Grenades[0] > 0)
+                {
+                    lbl_playerstate.ForeColor = Color.White;
+                    lbl_playerstate.Text = "Flashed";
 
-                lbl_CTRounds.Text = scores[0].ToString();
-                lbl_TRounds.Text = scores[1].ToString();
-            }
-            else if (gs.Player.Activity == PlayerActivity.TextInput)
-            {//Console is open
-
-            }
-            
-            if (gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && Health == 0)
-            {
-
-                lbl_playerstate.Text = "Dead";
-
-            }
-            else if (gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && Health > 0)
-            {
-                lbl_playerstate.ForeColor = Color.Green;
-                lbl_playerstate.Text = "Alive";
-
+                }
+                //SMOKED
+                if (Grenades[1] > 0)
+                {
+                    lbl_playerstate.ForeColor = Color.Gray;
+                    lbl_playerstate.Text = "In Smoke";
+                }
+                //BURNING
+                if (Grenades[2] > 0)
+                {
+                    lbl_playerstate.ForeColor = Color.Orange;
+                    lbl_playerstate.Text = "In Molly";
+                }
             }
             else
             {
-                lbl_playerstate.ForeColor = Color.Red;
-                lbl_playerstate.Text = "No server";
-
-            }
-
-
-            //FLASHED
-            if (gs.Player.State.Flashed == 0)
-            {
-                Flash = false;
-            }
-            else if (gs.Player.State.Flashed > 0)
-            {
-                lbl_playerstate.Text = "ALIVE AND FLASHED";
-                Flash = true;
-            }
-
-            //SMOKED
-            if (gs.Player.State.Smoked == 0)
-            {
-                Smoke = false;
-
-            }
-            else if (gs.Player.State.Smoked > 0)
-            {
-
-                lbl_playerstate.Text = "ALIVE AND SMOKED";
-                Smoke = true;
-            }
-            //BURNING
-            if (gs.Player.State.Burning == 0)
-            {
-                Molly = false;
-
-            }
-            else if (gs.Player.State.Burning > 0)
-            {
-
-                lbl_playerstate.Text = "ALIVE AND BURNING";
-                Molly = true;
-            }
-
-            if (Flash == false && Smoke == false && Molly == false && dead == false)
-            {
-
+                lbl_playerstate.ForeColor = Color.Gold;
+                lbl_playerstate.Text = "Spectating...";
             }
         }
         #endregion
@@ -327,28 +310,32 @@ namespace CSGSITools
         #region RoundState
         private void RoundState(GameState gs)
         {
-            lbl_currentMap.Text = gs.Map.Name;
+            lbl_currentMap.Text = gs.Map.Name.Split('/').Last();
 
             if (gs.Round.Phase == RoundPhase.Over)
             {
-                lbl_currentRoundState.Text = gs.Round.WinTeam + " - WINS";
-                lbl_currentRoundState.ForeColor = Color.Red;
-
+                if (gs.Round.WinTeam != RoundWinTeam.Undefined)
+                {
+                    if (gs.Round.WinTeam == RoundWinTeam.CT)
+                    {
+                        lbl_currentRoundState.ForeColor = Color.DodgerBlue;
+                    }
+                    else
+                    {
+                        lbl_currentRoundState.ForeColor = Color.IndianRed;
+                    }
+                    lbl_currentRoundState.Text = gs.Round.WinTeam + " - Wins";
+                }
             }
             else if (gs.Round.Phase == RoundPhase.Live)
             {
                 lbl_currentRoundState.ForeColor = Color.DarkGreen;
-                lbl_currentRoundState.Text = "LIVE";
+                lbl_currentRoundState.Text = "Live";
 
-                lbl_currentMap.ForeColor = Color.DarkGreen;
-
-
-                if (chk_autofocus.Checked && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && gs.Player.State.Health == 100)
+                if (cb_focus.SelectedIndex == 1 && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && gs.Player.State.Health == 100)
                 {
                     FocusProcess("csgo");
                 }
-
-                chk_stayState.Enabled = true;
             }
             else if (gs.Round.Phase == RoundPhase.FreezeTime)
             {
@@ -356,7 +343,7 @@ namespace CSGSITools
                 lbl_currentRoundState.Text = "* Freeze Time *";
 
 
-                if (chk_autofocusFrezzeTime.Checked && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && gs.Player.State.Health == 100)
+                if (cb_focus.SelectedIndex == 2 && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && gs.Player.State.Health == 100)
                 {
                     FocusProcess("csgo");
                 }
@@ -383,7 +370,7 @@ namespace CSGSITools
             }
             else if (gs.Round.Phase != RoundPhase.Undefined)
             {
-                lbl_currentMap.Text = gs.Map.Name;
+
             }
         }
         #endregion
@@ -433,20 +420,46 @@ namespace CSGSITools
 
         public static void SetStatus(int Number)
         {
-            steamfriends002.SetPersonaState((EPersonaState)int.Parse(Number.ToString()));
+            if (Number < 8)
+            {
+                steamfriends002.SetPersonaState((EPersonaState)int.Parse(Number.ToString()));
+            }
         }
 
         private void TrolhaTimer_Tick(object sender, EventArgs e)
         {
-            var abc = steamfriends002.GetFriendPersonaState(steamid.ConvertToUint64());
-            lbl_currentSteamState.Text = abc.ToString().Replace("k_EPersonaState", "");
-        }
+            string FriendPersonaState = steamfriends002.GetFriendPersonaState(steamid.ConvertToUint64()).ToString().Replace("k_EPersonaState", "");
+            
+            switch (FriendPersonaState)
+            {
+                case "Offline":
+                    lbl_currentSteamState.ForeColor = Color.Gray;
+                    lbl_currentSteamState.Text = FriendPersonaState;
+                    break;
+                case "Online":
+                    lbl_currentSteamState.ForeColor = Color.DodgerBlue;
+                    lbl_currentSteamState.Text = FriendPersonaState;
+                    break;
+                case "Away": case "Busy": case "Snooze":
+                    lbl_currentSteamState.ForeColor = Color.Orange;
+                    lbl_currentSteamState.Text = FriendPersonaState;
+                    break;
+                case "LookingToTrade": case "LookingToPlay":
+                    lbl_currentSteamState.ForeColor = Color.DodgerBlue;
+                    lbl_currentSteamState.Text = FriendPersonaState;
+                    break;
+                default:
+                    lbl_currentSteamState.ForeColor = Color.White;
+                    lbl_currentSteamState.Text = FriendPersonaState;
+                    break;
+            }
 
+        }
 
         #region ComboBox_Select_States_steam
         private void combo_states_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (chk_stayState.Checked)
+            if (this.combo_states.SelectedIndex < 8)
             {
                 SetStatus(this.combo_states.SelectedIndex);
             }
@@ -479,7 +492,7 @@ namespace CSGSITools
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
+
             SetStatus(1);
             Steamworks.Load(false);
             if (gsl != null)
@@ -573,6 +586,17 @@ namespace CSGSITools
             return null;
         }
 
+        private void btn_getMonitor_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show(DisplayConfiguration.GetCurrentMonitor().ToString());
 
+
+            foreach (DisplayConfiguration.PHYSICAL_MONITOR physicalMonitor in physicalMonitors)
+            {
+                Console.WriteLine(DisplayConfiguration.GetMonitorCapabilities(physicalMonitor));
+                Console.WriteLine(physicalMonitor.hPhysicalMonitor.ToInt32());
+                //DisplayConfiguration.SetMonitorBrightness(physicalMonitor, brightnessSlider.Value / brightnessSlider.Maximum);
+            }
+        }
     }
 }

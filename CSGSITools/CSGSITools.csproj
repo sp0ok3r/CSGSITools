@@ -196,6 +196,7 @@
     <Compile Include="CSGSITools_Form.Designer.cs">
       <DependentUpon>CSGSITools_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="DisplayConfiguration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CSGSITools_Form.resx">
