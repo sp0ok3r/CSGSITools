@@ -218,8 +218,6 @@ namespace CSGSITools
                     lbl_CTRounds.Text = scores[0].ToString();
                     lbl_TRounds.Text = scores[1].ToString();
 
-                    Console.WriteLine("ali " + gs.Player.Activity);
-
                     if (Health == 0)
                     {
                         lbl_playerstate.ForeColor = Color.DarkRed;
@@ -293,7 +291,7 @@ namespace CSGSITools
             else if (gs.Round.Phase == RoundPhase.FreezeTime || gs.Round.Phase == RoundPhase.Live)
             {
                 IsPlanted = false;
-                lbl_bombCurrentState.ForeColor = Color.DarkRed;
+                lbl_bombCurrentState.ForeColor = Color.Red;
                 lbl_bombCurrentState.Text = "Bomb not planted";
 
             }
@@ -332,10 +330,12 @@ namespace CSGSITools
                 lbl_currentRoundState.ForeColor = Color.DarkGreen;
                 lbl_currentRoundState.Text = "Live";
 
-                if (cb_focus.SelectedIndex == 1 && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && gs.Player.State.Health == 100)
-                {
+                if (cb_focus.SelectedIndex == 1 
+                    && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) 
+                    && gs.Player.State.Health == 100)
+                    {
                     FocusProcess("csgo");
-                }
+                    }
             }
             else if (gs.Round.Phase == RoundPhase.FreezeTime)
             {
@@ -343,8 +343,11 @@ namespace CSGSITools
                 lbl_currentRoundState.Text = "* Freeze Time *";
 
 
-                if (cb_focus.SelectedIndex == 2 && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) && gs.Player.State.Health == 100)
+                if (cb_focus.SelectedIndex == 2 
+                    && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) 
+                    && gs.Player.State.Health == 100)
                 {
+                    
                     FocusProcess("csgo");
                 }
             }
@@ -384,13 +387,40 @@ namespace CSGSITools
 
         private void FocusProcess(string procName)
         {
-            Process[] objProcesses = Process.GetProcessesByName(procName); if (objProcesses.Length > 0)
+            Process[] objProcesses = Process.GetProcessesByName(procName);
+            if (objProcesses.Length > 0)
             {
                 IntPtr hWnd = IntPtr.Zero;
                 hWnd = objProcesses[0].MainWindowHandle;
                 ShowWindowAsync(new HandleRef(null, hWnd), SW_RESTORE);
                 SetForegroundWindow(objProcesses[0].MainWindowHandle);
             }
+        }
+
+
+        [DllImport("user32.dll")]
+        private static extern Int32 GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+
+        // Returns the name of the process owning the foreground window.
+        private string GetForegroundProcessName()
+        {
+            IntPtr hwnd = GetForegroundWindow();
+
+            // The foreground window can be NULL in certain circumstances, 
+            // such as when a window is losing activation.
+            if (hwnd == null)
+                return "Unknown";
+
+            uint pid;
+            GetWindowThreadProcessId(hwnd, out pid);
+
+            foreach (Process p in Process.GetProcesses())
+            {
+                if (p.Id == pid)
+                    return p.ProcessName;
+            }
+
+            return "Unknown";
         }
         #endregion
 
@@ -492,7 +522,6 @@ namespace CSGSITools
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-
             SetStatus(1);
             Steamworks.Load(false);
             if (gsl != null)
