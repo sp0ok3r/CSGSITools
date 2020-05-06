@@ -127,7 +127,7 @@
             this.groupBox4.Size = new System.Drawing.Size(352, 106);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Extras";
+            this.groupBox4.Text = "Automation";
             // 
             // metroLabel10
             // 
@@ -193,7 +193,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(258, 9);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(352, 122);
+            this.groupBox1.Size = new System.Drawing.Size(352, 106);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Steam State Chooser";
@@ -201,11 +201,11 @@
             // metroLabel13
             // 
             this.metroLabel13.AutoSize = true;
-            this.metroLabel13.Location = new System.Drawing.Point(44, 39);
+            this.metroLabel13.Location = new System.Drawing.Point(60, 29);
             this.metroLabel13.Name = "metroLabel13";
-            this.metroLabel13.Size = new System.Drawing.Size(87, 19);
+            this.metroLabel13.Size = new System.Drawing.Size(71, 19);
             this.metroLabel13.TabIndex = 75;
-            this.metroLabel13.Text = "Change State";
+            this.metroLabel13.Text = "Change To";
             this.metroLabel13.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroLabel13.UseCustomBackColor = true;
             this.metroLabel13.UseStyleColors = true;
@@ -217,7 +217,7 @@
             this.metroComboBox2.Items.AddRange(new object[] {
             "Close The App",
             "End of the match"});
-            this.metroComboBox2.Location = new System.Drawing.Point(137, 69);
+            this.metroComboBox2.Location = new System.Drawing.Point(137, 59);
             this.metroComboBox2.Name = "metroComboBox2";
             this.metroComboBox2.Size = new System.Drawing.Size(160, 29);
             this.metroComboBox2.TabIndex = 74;
@@ -228,7 +228,7 @@
             // metroLabel12
             // 
             this.metroLabel12.AutoSize = true;
-            this.metroLabel12.Location = new System.Drawing.Point(68, 74);
+            this.metroLabel12.Location = new System.Drawing.Point(68, 64);
             this.metroLabel12.Name = "metroLabel12";
             this.metroLabel12.Size = new System.Drawing.Size(63, 19);
             this.metroLabel12.TabIndex = 73;
@@ -251,7 +251,7 @@
             "Looking To Play",
             "Invisible",
             "Disabled"});
-            this.combo_states.Location = new System.Drawing.Point(137, 34);
+            this.combo_states.Location = new System.Drawing.Point(137, 24);
             this.combo_states.Name = "combo_states";
             this.combo_states.Size = new System.Drawing.Size(160, 29);
             this.combo_states.TabIndex = 17;
@@ -289,7 +289,7 @@
             this.groupBox3.Controls.Add(this.lbl_currentMap);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(3, 7);
+            this.groupBox3.Location = new System.Drawing.Point(7, 7);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(222, 253);
             this.groupBox3.TabIndex = 4;
