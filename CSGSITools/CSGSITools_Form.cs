@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using Win32Interop.Methods;
 
 namespace CSGSITools
 {
@@ -101,6 +102,16 @@ namespace CSGSITools
         public CSGSITools_Form()
         {
             InitializeComponent();
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            Region = Region.FromHrgn(Gdi32.CreateRoundRectRgn(0, 0, Width, Height, 5, 5));
+            
+            lbl_currentMap.Visible = false;
+            lbl_CTRounds.Visible = false;
+            lbl_TRounds.Visible = false;
+            lbl_playerstate.Visible = false;
+            lbl_currentRoundState.Visible = false;
+
             cb_focus.SelectedIndex = 0;
             combo_states.SelectedIndex = 8;
 
@@ -116,8 +127,16 @@ namespace CSGSITools
             ps_status.Visible = true;
             CheckCSGOProcess();
 
-            LoadSteam();
             gslStart();
+            LoadSteam();
+            TrolhaTimer.Enabled = true;
+            
+
+            lbl_currentMap.Visible = true;
+            lbl_CTRounds.Visible = true;
+            lbl_TRounds.Visible = true;
+            lbl_playerstate.Visible = true;
+            lbl_currentRoundState.Visible = true;
         }
 
         public static void LoadCSGOFolder()
@@ -144,16 +163,16 @@ namespace CSGSITools
         private void gslStart()
         {
             gsl = new GameStateListener(3000);
-            gsl.NewGameState += new NewGameStateHandler(CurrentBombState);
-            gsl.NewGameState += new NewGameStateHandler(RoundState);
-            gsl.NewGameState += new NewGameStateHandler(PlayerState);
+            //gsl.NewGameState += new NewGameStateHandler(Bomb_State);
+            gsl.NewGameState += new NewGameStateHandler(Round_State);
+            gsl.NewGameState += new NewGameStateHandler(Player_State);
 
 
             if (!gsl.Start())
             {
                 Environment.Exit(0);
             }
-
+            Console.WriteLine("Listening...");
         }
 
         private void CheckCSGOProcess()
@@ -161,12 +180,12 @@ namespace CSGSITools
             Process[] ps = Process.GetProcessesByName("csgo");
             if (ps.Length == 0)
             {
-                MessageBox.Show("Starting csgo for you... restarting " + Program.AppName + " in 15sec.", Program.AppName,
+                MessageBox.Show("Starting csgo for you... restarting " + Program.AppName + " in 20sec.", Program.AppName,
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Process.Start("steam://run/730");
 
-                Thread.Sleep(15000);
+                Thread.Sleep(20000);
                 Process.Start(Application.ExecutablePath);
                 Application.Exit();
             }
@@ -174,7 +193,7 @@ namespace CSGSITools
 
 
         #region PlayerState
-        private void PlayerState(GameState gs)
+        private void Player_State(GameState gs)
         {
 
             if (gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()))
@@ -217,6 +236,11 @@ namespace CSGSITools
 
                     lbl_CTRounds.Text = scores[0].ToString();
                     lbl_TRounds.Text = scores[1].ToString();
+
+                    lbl_playerScore.Text = "K/D/A: "+stats[0] +"/"+ stats[1] +"/"+stats[2];
+                    
+                    
+
 
                     if (Health == 0)
                     {
@@ -264,52 +288,48 @@ namespace CSGSITools
         #endregion
 
         #region BombState
-        private void CurrentBombState(GameState gs)
+        private void Bomb_State(GameState gs)
         {
             if (gs.Round.Phase == RoundPhase.Live &&
                gs.Bomb.State == BombState.Planted &&
                gs.Previously.Bomb.State == BombState.Planting)
             {
-                lbl_bombCurrentState.ForeColor = Color.Red;
-                lbl_bombCurrentState.Text = "Bomb has been planted";
+                //lbl_bombCurrentState.ForeColor = Color.Red;
+                //lbl_bombCurrentState.Text = "Bomb has been planted";
 
+                float a = gs.Bomb.Countdown;
+                Console.WriteLine(a);
                 IsPlanted = true;
 
             }
             else if (gs.Round.Bomb == BombState.Exploded)
             {
-                lbl_bombCurrentState.ForeColor = Color.Red;
-                lbl_bombCurrentState.Text = "Exploded";
+                //lbl_bombCurrentState.ForeColor = Color.Red;
+                //lbl_bombCurrentState.Text = "Exploded";
 
             }
             else if (gs.Round.Bomb == BombState.Defused)
             {
-                lbl_bombCurrentState.ForeColor = Color.DodgerBlue;
-                lbl_bombCurrentState.Text = "Defused";
-
-            }
-            else if (gs.Round.Phase == RoundPhase.FreezeTime || gs.Round.Phase == RoundPhase.Live)
-            {
-                IsPlanted = false;
-                lbl_bombCurrentState.ForeColor = Color.Red;
-                lbl_bombCurrentState.Text = "Bomb not planted";
+                //lbl_bombCurrentState.ForeColor = Color.DodgerBlue;
+                //lbl_bombCurrentState.Text = "Defused";
 
             }
             else
             {
                 IsPlanted = false;
-                lbl_bombCurrentState.ForeColor = Color.Red;
-                lbl_bombCurrentState.Text = "No server";
+                //lbl_bombCurrentState.ForeColor = Color.Red;
+                //lbl_bombCurrentState.Text = "No server";
 
             }
         }
         #endregion
 
         #region RoundState
-        private void RoundState(GameState gs)
+        private void Round_State(GameState gs)
         {
+            lbl_currentMap.ForeColor = Color.White;
             lbl_currentMap.Text = gs.Map.Name.Split('/').Last();
-
+            
             if (gs.Round.Phase == RoundPhase.Over)
             {
                 if (gs.Round.WinTeam != RoundWinTeam.Undefined)
@@ -330,12 +350,14 @@ namespace CSGSITools
                 lbl_currentRoundState.ForeColor = Color.DarkGreen;
                 lbl_currentRoundState.Text = "Live";
 
-                if (cb_focus.SelectedIndex == 1 
-                    && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) 
+                if (cb_focus.SelectedIndex == 1
+                    && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString())
                     && gs.Player.State.Health == 100)
-                    {
+                {
                     FocusProcess("csgo");
-                    }
+                }
+
+                
             }
             else if (gs.Round.Phase == RoundPhase.FreezeTime)
             {
@@ -343,11 +365,11 @@ namespace CSGSITools
                 lbl_currentRoundState.Text = "* Freeze Time *";
 
 
-                if (cb_focus.SelectedIndex == 2 
-                    && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString()) 
+                if (cb_focus.SelectedIndex == 2
+                    && gs.Player.SteamID.Equals(txtBox_steamID.Text.ToString())
                     && gs.Player.State.Health == 100)
                 {
-                    
+
                     FocusProcess("csgo");
                 }
             }
@@ -459,7 +481,7 @@ namespace CSGSITools
         private void TrolhaTimer_Tick(object sender, EventArgs e)
         {
             string FriendPersonaState = steamfriends002.GetFriendPersonaState(steamid.ConvertToUint64()).ToString().Replace("k_EPersonaState", "");
-            
+
             switch (FriendPersonaState)
             {
                 case "Offline":
@@ -470,11 +492,14 @@ namespace CSGSITools
                     lbl_currentSteamState.ForeColor = Color.DodgerBlue;
                     lbl_currentSteamState.Text = FriendPersonaState;
                     break;
-                case "Away": case "Busy": case "Snooze":
+                case "Away":
+                case "Busy":
+                case "Snooze":
                     lbl_currentSteamState.ForeColor = Color.Orange;
                     lbl_currentSteamState.Text = FriendPersonaState;
                     break;
-                case "LookingToTrade": case "LookingToPlay":
+                case "LookingToTrade":
+                case "LookingToPlay":
                     lbl_currentSteamState.ForeColor = Color.DodgerBlue;
                     lbl_currentSteamState.Text = FriendPersonaState;
                     break;
