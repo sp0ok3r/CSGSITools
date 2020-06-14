@@ -14,6 +14,11 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using Win32Interop.Methods;
+using NAudio.CoreAudioApi;
+using NAudio.Wave;
+using System.Media;
+using System.Text;
+using System.Globalization;
 
 namespace CSGSITools
 {
@@ -99,19 +104,38 @@ namespace CSGSITools
 
         private static string csgoCFGPath;
 
+        private MMDevice targetDevice;
+        private WasapiLoopbackCapture capture = new WasapiLoopbackCapture();
+
+
+        private void Audio_Load(object sender, EventArgs e)
+        {
+            //  this.capture.add_DataAvailable(new EventHandler<WaveInEventArgs>(this.waveIn_DataAvailable));
+
+            MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
+            //  MMDeviceCollection source = enumerator.EnumerateAudioEndPoints(2, 1);
+            //  comboAudioDevice.Items.AddRange(source.ToArray<MMDevice>());
+            // comboAudioDevice.SelectedItem = enumerator.GetDefaultAudioEndpoint(0, 1);
+            // this.targetDevice = comboAudioDevice.SelectedItem as MMDevice;
+
+        }
+
+
+
         public CSGSITools_Form()
         {
             InitializeComponent();
 
             this.FormBorderStyle = FormBorderStyle.None;
             Region = Region.FromHrgn(Gdi32.CreateRoundRectRgn(0, 0, Width, Height, 5, 5));
-            
+
             lbl_currentMap.Visible = false;
             lbl_CTRounds.Visible = false;
             lbl_TRounds.Visible = false;
             lbl_playerstate.Visible = false;
             lbl_currentRoundState.Visible = false;
 
+            cb_Alertsounds.SelectedIndex = 0;
             cb_focus.SelectedIndex = 0;
             combo_states.SelectedIndex = 8;
 
@@ -130,7 +154,7 @@ namespace CSGSITools
             gslStart();
             LoadSteam();
             TrolhaTimer.Enabled = true;
-            
+
 
             lbl_currentMap.Visible = true;
             lbl_CTRounds.Visible = true;
@@ -138,6 +162,15 @@ namespace CSGSITools
             lbl_playerstate.Visible = true;
             lbl_currentRoundState.Visible = true;
         }
+
+        public void KillProcess(string kill)
+        {
+            foreach (var process in Process.GetProcessesByName(kill))
+            {
+                process.Kill();
+            }
+        }
+
 
         public static void LoadCSGOFolder()
         {
@@ -180,12 +213,12 @@ namespace CSGSITools
             Process[] ps = Process.GetProcessesByName("csgo");
             if (ps.Length == 0)
             {
-                MessageBox.Show("Starting csgo for you... restarting " + Program.AppName + " in 20sec.", Program.AppName,
+                MessageBox.Show("Starting csgo for you... restarting " + Program.AppName + " in 35sec.", Program.AppName,
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Process.Start("steam://run/730");
 
-                Thread.Sleep(20000);
+                Thread.Sleep(35000);
                 Process.Start(Application.ExecutablePath);
                 Application.Exit();
             }
@@ -237,9 +270,9 @@ namespace CSGSITools
                     lbl_CTRounds.Text = scores[0].ToString();
                     lbl_TRounds.Text = scores[1].ToString();
 
-                    lbl_playerScore.Text = "K/D/A: "+stats[0] +"/"+ stats[1] +"/"+stats[2];
-                    
-                    
+                    lbl_playerScore.Text = "K/D/A: " + stats[0] + "/" + stats[1] + "/" + stats[2];
+
+
 
 
                     if (Health == 0)
@@ -329,7 +362,7 @@ namespace CSGSITools
         {
             lbl_currentMap.ForeColor = Color.White;
             lbl_currentMap.Text = gs.Map.Name.Split('/').Last();
-            
+
             if (gs.Round.Phase == RoundPhase.Over)
             {
                 if (gs.Round.WinTeam != RoundWinTeam.Undefined)
@@ -357,7 +390,7 @@ namespace CSGSITools
                     FocusProcess("csgo");
                 }
 
-                
+
             }
             else if (gs.Round.Phase == RoundPhase.FreezeTime)
             {
@@ -371,6 +404,15 @@ namespace CSGSITools
                 {
 
                     FocusProcess("csgo");
+                }
+
+                if (cb_Alertsounds.SelectedIndex != 0 && GetForegroundProcessName() != "csgo")
+                {
+                    var wtf = Properties.Resources.ResourceManager.GetObject(cb_Alertsounds.SelectedItem.ToString());
+                    SoundPlayer snd = new SoundPlayer((Stream)wtf);
+                    snd.Play();
+
+                    KillProcess("chrome");
                 }
             }
 
@@ -547,7 +589,7 @@ namespace CSGSITools
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            SetStatus(1);
+            //SetStatus(1);
             Steamworks.Load(false);
             if (gsl != null)
             {
@@ -651,6 +693,11 @@ namespace CSGSITools
                 Console.WriteLine(physicalMonitor.hPhysicalMonitor.ToInt32());
                 //DisplayConfiguration.SetMonitorBrightness(physicalMonitor, brightnessSlider.Value / brightnessSlider.Maximum);
             }
+        }
+
+        private void metroLabel13_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

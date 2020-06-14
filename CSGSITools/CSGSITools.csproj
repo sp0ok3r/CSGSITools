@@ -79,6 +79,10 @@
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -239,6 +243,10 @@
     <None Include="Resources\DiscordLogo.png" />
     <None Include="Resources\github_logo.png" />
     <None Include="Resources\SteamLogo.png" />
+    <None Include="Resources\chord.wav" />
+    <None Include="Resources\trumpets.mp3" />
+    <None Include="Resources\chime.wav" />
+    <None Include="Resources\trumpets.wav" />
     <Content Include="vnk5wll_cog_icon.ico" />
   </ItemGroup>
   <ItemGroup>

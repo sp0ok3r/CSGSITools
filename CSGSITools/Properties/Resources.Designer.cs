@@ -63,9 +63,18 @@ namespace CSGSITools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream alert {
+        internal static System.IO.UnmanagedMemoryStream Chime {
             get {
-                return ResourceManager.GetStream("alert", resourceCulture);
+                return ResourceManager.GetStream("Chime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Chord {
+            get {
+                return ResourceManager.GetStream("Chord", resourceCulture);
             }
         }
         
@@ -96,6 +105,15 @@ namespace CSGSITools.Properties {
             get {
                 object obj = ResourceManager.GetObject("SteamLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Trumpets {
+            get {
+                return ResourceManager.GetStream("Trumpets", resourceCulture);
             }
         }
     }
